@@ -2,7 +2,9 @@
     'use strict';
 
     angular.module('blocks.services', [
-        'service.weather'
+        'service.user',
+        'service.group',
+        'service.courses'
     ]);
 
 })();

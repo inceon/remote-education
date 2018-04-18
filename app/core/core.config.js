@@ -16,23 +16,32 @@
         $urlRouterProvider.otherwise('/home');
 
         $stateProvider
-
             .state('home', {
                 url: '/home',
                 templateUrl: 'templates/homepage/homepage.html',
                 controller: 'HomepageController',
+                controllerAs: 'vm'
+            })
+            .state('main', {
+                url: '/app',
+                template: '<ui-view></ui-view>',
+                controller: 'MainController',
+                controllerAs: 'vm',
+
+            })
+            .state('main.dashboard', {
+                url: '/dashboard',
+                templateUrl: 'templates/dashboard/dashboard.html',
+                controller: 'DashboardController',
                 controllerAs: 'vm',
                 resolve: {
-                    data: function (weather) {
-                        return weather.get({
-                                q: 'Poltava,UA',
-                                appid: '264a4855a3aeeb5196ff38e3d006cbe9',
-                                mode: 'json',
-                                units: 'metric'
-                            })
-                            .then(function (res) {
-                                return res;
-                            })
+                    courses_user: function (courses, $rootScope) {
+                        return courses.userAll($rootScope.objectId);
+                    },
+                    coursesData: function ($q, courses_user, courses) {
+                        return $q.all(courses_user.map((course_user) => {
+                            return courses.get(course_user.course);
+                        }))
                     }
                 }
             })
@@ -42,7 +51,6 @@
                 controller: 'LoginController',
                 controllerAs: 'vm',
             })
-
 
     }
 

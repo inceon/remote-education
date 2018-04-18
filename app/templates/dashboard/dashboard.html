@@ -1,0 +1,6 @@
+<ul class="list-group">
+    <a href="#" class="list-group-item"
+        ng-repeat="course in vm.courses"
+        ui-sref="course({id: course.objectId})"
+    >{{ course.name }}</a>
+</ul>

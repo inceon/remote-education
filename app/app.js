@@ -8,7 +8,11 @@
             'blocks.filters',
 
         ])
-        .run(runBlock);
+        .run(runBlock)
+        .constant('back4app', {
+            appId: 'bUbpES2xKBNkGeNzkJYf3SbBBPR1I6HzkIe1xniK',
+            token: 'dsBJyP5VRbxNZgMQEfX5RzqyMpOLFBRa713w0l1j'
+        });
 
     // runBlock.$inject = ['$sessionStorage','$localStorage',];
 

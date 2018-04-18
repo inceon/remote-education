@@ -1,26 +1,20 @@
-<form name="loginForm" class="login">
-    <md-content class="md-no-momentum" layout-padding>
-        <div class="btn-container">
-            <a>У меня еще нет аккаунта</a>
-        </div>
-        <md-input-container class="md-icon-float md-block">
-            <!-- Use floating label instead of placeholder -->
-            <label>Эл.почта</label>
-            <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
-            <input ng-model="user.mail" type="text">
-        </md-input-container>
-
-        <md-input-container class="md-icon-float md-block">
-            <!-- Use floating label instead of placeholder -->
-            <label>Пароль</label>
-            <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
-            <input ng-model="user.password" type="password">
-        </md-input-container>
-        <div class="btn-container">
-            <md-button class="md-raised md-primary">
-                Войти
-            </md-button>
-        </div>
-
-    </md-content>
-</form>
+<div class="card card-login mx-auto mt-5">
+    <div class="card-body">
+        <form>
+            <div class="alert alert-danger" ng-if="vm.error">
+                Не вірно введені дані
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email адреса</label>
+                <input class="form-control" id="exampleInputEmail1"
+                       type="email" aria-describedby="emailHelp" ng-model="vm.user.email">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Пароль</label>
+                <input class="form-control" id="exampleInputPassword1"
+                       type="password" ng-model="vm.user.password">
+            </div>
+            <a class="btn btn-primary btn-block" ng-click="vm.login()">Ввійти</a>
+        </form>
+    </div>
+</div>

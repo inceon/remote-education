@@ -10,13 +10,15 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>My AngularJS App</title>
+    <title>Дистанційна освіта</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
-    <link rel="stylesheet" href="content/css/app.css">
     <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="content/css/app.css">
 
 
 </head>
@@ -24,17 +26,43 @@
 
 <div id="page" class="main-container">
 
-    <div ui-view></div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <a class="navbar-brand" href="index.html">Дистанційне навчання</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button"
+                aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-link" ng-if="$root.user">
+                    Привіт {{ $root.user.name }}!
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" ui-sref="login" ng-if="!$root.user">
+                        <i class="fa fa-fw fa-sign-in"></i>Ввійти
+                    </a>
+                    <a class="nav-link" ui-sref="logout" ng-if="$root.user">
+                        <i class="fa fa-fw fa-sign-out"></i>Вийти
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div ui-view style="margin-top: 60px" class="container"></div>
 
 </div>
 
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-<script src="bower_components/angular-animate/angular-animate.js"></script>
-<script src="bower_components/angular-aria/angular-aria.js"></script>
-<script src="bower_components/angular-messages/angular-messages.js"></script>
+<!--<script src="bower_components/angular-animate/angular-animate.js"></script>-->
+<!--<script src="bower_components/angular-aria/angular-aria.js"></script>-->
+<!--<script src="bower_components/angular-messages/angular-messages.js"></script>-->
 <script src="bower_components/angular-material/angular-material.min.js"></script>
 <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js"></script>
 
 <script src="app.js"></script>
 <script src="core/core.module.js"></script>
@@ -46,7 +74,9 @@
 
 
 <!--services-->
-<script src="services/weather.service.js"></script>
+<script src="services/user.service.js"></script>
+<script src="services/group.service.js"></script>
+<script src="services/courses.service.js"></script>
 
 <!--factories-->
 <script src="factories/request.js"></script>
@@ -59,6 +89,9 @@
 
 <!--controllers-->
 <script src="templates/homepage/homepage.controller.js"></script>
+<script src="templates/login/login.controller.js"></script>
+<script src="templates/main/main.controller.js"></script>
+<script src="templates/dashboard/dashboard.controller.js"></script>
 
 
 </body>

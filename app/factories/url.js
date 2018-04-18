@@ -8,9 +8,13 @@
     url.$inject = [];
 
     function url() {
-        let baseUrl = 'http://api.openweathermap.org/data/2.5/';
+        var baseUrl = 'https://parseapi.back4app.com/classes/';
+
         return {
-            weather: baseUrl + 'weather'
+            user    : baseUrl + 'Users',
+            group   : baseUrl + 'Group',
+            courses : baseUrl + 'Courses',
+            user_course : baseUrl + 'User_Course'
         };
     }
 
