@@ -5,11 +5,10 @@
         .controller('HomepageController', HomepageController);
 
 
-    HomepageController.$inject = ['data'];
+    HomepageController.$inject = [];
 
-    function HomepageController(data) {
+    function HomepageController() {
         let vm = this;
 
-        vm.weather = data;
     }
 })();

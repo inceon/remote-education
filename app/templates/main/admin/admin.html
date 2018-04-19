@@ -1,5 +1,8 @@
 <div class="text-center font-weight-bold">
     Користувачі
+    <button>
+        <i class="fa fa-plus"></i>
+    </button>
 </div>
 
 <table class="table">
@@ -11,16 +14,48 @@
         <th scope="col">Email</th>
         <th scope="col">Група</th>
         <th scope="col">Роль</th>
+        <th scope="col">Дії</th>
     </tr>
     </thead>
     <tbody>
         <tr ng-repeat="user in vm.users">
-            <th scope="row">{{ $index }}</th>
-            <td ng-bind="user.name"></td>
-            <td ng-bind="user.surname"></td>
-            <td ng-bind="user.email"></td>
-            <td ng-bind="user.group"></td>
-            <td ng-bind="user.role"></td>
+            <th scope="row">{{ $index+1 }}</th>
+            <td>
+                <span ng-if="!vm.isEdit[$index]">{{ user.name }}</span>
+                <input type="text" name="name" ng-model="user.name" ng-if="vm.isEdit[$index]">
+            </td>
+            <td>
+                <span ng-if="!vm.isEdit[$index]">{{ user.surname }}</span>
+                <input type="text" name="surname" ng-model="user.surname" ng-if="vm.isEdit[$index]">
+            </td>
+            <td>
+                <span ng-if="!vm.isEdit[$index]">{{ user.email }}</span>
+                <input type="text" name="email" ng-model="user.email" ng-if="vm.isEdit[$index]">
+            </td>
+            <td>
+                <span ng-if="!vm.isEdit[$index]">{{ user.group }}</span>
+                <input type="text" name="group" ng-model="user.group" ng-if="vm.isEdit[$index]">
+            </td>
+            <td>
+                <span ng-if="!vm.isEdit[$index]">{{ user.role }}</span>
+                <select ng-model="user.role" ng-if="vm.isEdit[$index]">
+                    <option value="admin">Адмін</option>
+                    <option value="teacher">Вчитель</option>
+                    <option value="user">Користувач</option>
+                </select>
+            </td>
+            <td>
+                <span ng-if="!vm.isEdit[$index]">
+                    <a class="cursor-pointer"><i class="fa fa-pencil" ng-click="vm.edit($index)"></i></a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a class="cursor-pointer"><i class="fa fa-remove" ng-click="vm.remove(user)"></i></a>
+                </span>
+                <span ng-if="vm.isEdit[$index]">
+                    <a class="cursor-pointer"><i class="fa fa-save" ng-click="vm.saveUser(user, $index)"></i></a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a class="cursor-pointer"><i class="fa fa-remove" ng-click="vm.edit($index)"></i></a>
+                </span>
+            </td>
         </tr>
     </tbody>
 </table>

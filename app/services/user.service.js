@@ -16,7 +16,9 @@
             register: register,
             one: one,
             all: all,
-            logout: logout
+            logout: logout,
+            delete: deleteF,
+            save: save
         };
 
         /**
@@ -62,6 +64,14 @@
                     return res.results[0];
                 });
         }
+        
+        function deleteF(userId) {
+            return http
+                .delete(url.user + '/' + userId.objectId)
+                .then(function (res) {
+                    return res.results;
+                });
+        }
 
         function all() {
             return http.get(url.user)
@@ -76,6 +86,16 @@
         function logout() {
             delete $rootScope.user;
             delete $localStorage.userId;
+        }
+
+        function save(user) {
+            delete user.createdAt;
+            delete user.updatedAt;
+            return http
+                .put(url.user + '/' + user.objectId, user)
+                .then(function (res) {
+                    return res.results;
+                });
         }
     }
 })();

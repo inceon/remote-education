@@ -19,3 +19,7 @@
 
 md-content.md-default-theme, md-content {
   background-color: transparent; }
+
+.cursor-pointer {
+    cursor: pointer;
+}
