@@ -42,8 +42,15 @@
                     <a class="nav-link" ui-sref="login" ng-if="!$root.user">
                         <i class="fa fa-fw fa-sign-in"></i>Ввійти
                     </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" ui-sref="logout" ng-if="$root.user">
                         <i class="fa fa-fw fa-sign-out"></i>Вийти
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" ui-sref="main.admin" ng-if="$root.user.role == 'admin'">
+                        <i class="fa fa-fw fa-lock"></i>Адмінка
                     </a>
                 </li>
             </ul>
@@ -61,6 +68,7 @@
 <!--<script src="bower_components/angular-messages/angular-messages.js"></script>-->
 <script src="bower_components/angular-material/angular-material.min.js"></script>
 <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<script src="bower_components/ngstorage/ngStorage.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js"></script>
 
@@ -91,7 +99,8 @@
 <script src="templates/homepage/homepage.controller.js"></script>
 <script src="templates/login/login.controller.js"></script>
 <script src="templates/main/main.controller.js"></script>
-<script src="templates/dashboard/dashboard.controller.js"></script>
+<script src="templates/main/dashboard/dashboard.controller.js"></script>
+<script src="templates/main/admin/admin.controller.js"></script>
 
 
 </body>

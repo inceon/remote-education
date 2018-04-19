@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('app.core', [
-        'ui.router', 'toastr'
+        'ui.router', 'toastr', 'ngStorage'
     ]);
 
 

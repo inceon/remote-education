@@ -6,15 +6,16 @@
         .service('user', user);
 
 
-    user.$inject = ['http', 'url', '$rootScope'];
+    user.$inject = ['http', 'url', '$rootScope', '$localStorage'];
 
-    function user(http, url, $rootScope) {
+    function user(http, url, $rootScope, $localStorage) {
 
 
         return {
             login: login,
             register: register,
             one: one,
+            all: all,
             logout: logout
         };
 
@@ -34,6 +35,7 @@
             })
             .then(function (res) {
                 $rootScope.user = res.results[0];
+                $localStorage.userId = res.results[0].objectId;
                 return res.results;
             })
         }
@@ -57,6 +59,13 @@
                     }
                 })
                 .then(function (res) {
+                    return res.results[0];
+                });
+        }
+
+        function all() {
+            return http.get(url.user)
+                .then(function (res) {
                     return res.results;
                 });
         }
@@ -66,6 +75,7 @@
          */
         function logout() {
             delete $rootScope.user;
+            delete $localStorage.userId;
         }
     }
 })();

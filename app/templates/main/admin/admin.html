@@ -1,0 +1,26 @@
+<div class="text-center font-weight-bold">
+    Користувачі
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">І'мя</th>
+        <th scope="col">Прізвище</th>
+        <th scope="col">Email</th>
+        <th scope="col">Група</th>
+        <th scope="col">Роль</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="user in vm.users">
+            <th scope="row">{{ $index }}</th>
+            <td ng-bind="user.name"></td>
+            <td ng-bind="user.surname"></td>
+            <td ng-bind="user.email"></td>
+            <td ng-bind="user.group"></td>
+            <td ng-bind="user.role"></td>
+        </tr>
+    </tbody>
+</table>

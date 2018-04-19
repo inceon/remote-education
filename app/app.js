@@ -14,8 +14,18 @@
             token: 'dsBJyP5VRbxNZgMQEfX5RzqyMpOLFBRa713w0l1j'
         });
 
-    // runBlock.$inject = ['$sessionStorage','$localStorage',];
+    runBlock.$inject = ['$localStorage', 'user', '$rootScope'];
 
-    function runBlock() {
+    function runBlock($localStorage, user, $rootScope) {
+
+        if($localStorage.userId) {
+
+            user.one($localStorage.userId)
+                .then((res) => {
+                    $rootScope.user = res;
+                })
+
+        }
+
     }
 })();

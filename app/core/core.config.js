@@ -31,7 +31,7 @@
             })
             .state('main.dashboard', {
                 url: '/dashboard',
-                templateUrl: 'templates/dashboard/dashboard.html',
+                templateUrl: 'templates/main/dashboard/dashboard.html',
                 controller: 'DashboardController',
                 controllerAs: 'vm',
                 resolve: {
@@ -42,6 +42,17 @@
                         return $q.all(courses_user.map((course_user) => {
                             return courses.get(course_user.course);
                         }))
+                    }
+                }
+            })
+            .state('main.admin', {
+                url: '/admin',
+                templateUrl: 'templates/main/admin/admin.html',
+                controller: 'AdminController',
+                controllerAs: 'vm',
+                resolve: {
+                    usersList: function (user) {
+                        return user.all();
                     }
                 }
             })
