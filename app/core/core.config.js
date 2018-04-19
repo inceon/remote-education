@@ -45,6 +45,20 @@
                     }
                 }
             })
+            .state('main.course', {
+                url: '/course/:id',
+                templateUrl: 'templates/main/course/course.html',
+                controller: 'CourseController',
+                controllerAs: 'vm',
+                params: {
+                    course: null
+                },
+                resolve: {
+                    lessons: function (courses, $stateParams) {
+                        return courses.lessons($stateParams.id);
+                    }
+                }
+            })
             .state('main.admin', {
                 url: '/admin',
                 templateUrl: 'templates/main/admin/admin.html',

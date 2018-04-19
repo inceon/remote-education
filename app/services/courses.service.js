@@ -13,7 +13,8 @@
         return {
             all: all,
             userAll: userAll,
-            get: get
+            get: get,
+            lessons: lessons
         };
 
         function all(data) {
@@ -37,6 +38,14 @@
                 }
             })
             .then(res => res.results[0])
+        }
+
+        function lessons(courseId) {
+            return http.get(url.lessons, {
+                where: {
+                    "course": courseId
+                }
+            }).then(res => res.results);
         }
     }
 })();
