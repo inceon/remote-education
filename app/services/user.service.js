@@ -18,7 +18,8 @@
             all: all,
             logout: logout,
             delete: deleteF,
-            save: save
+            save: save,
+            create: create
         };
 
         /**
@@ -67,7 +68,7 @@
         
         function deleteF(userId) {
             return http
-                .delete(url.user + '/' + userId.objectId)
+                .delete(url.user + '/' + userId)
                 .then(function (res) {
                     return res.results;
                 });
@@ -96,6 +97,11 @@
                 .then(function (res) {
                     return res.results;
                 });
+        }
+
+        function create(user) {
+            return http
+                .post(url.user, user);
         }
     }
 })();

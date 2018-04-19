@@ -23,6 +23,9 @@
             put: function (url, data) {
                 return request('PUT', url, data);
             },
+            delete: function (url, data) {
+                return request('DELETE', url, data);
+            },
             file: function (url, data) {
                 return requestFile(url, data);
             }

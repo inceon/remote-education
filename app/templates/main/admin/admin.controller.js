@@ -15,15 +15,26 @@
             return false;
         }
         vm.users = usersList;
+        vm.isCreate = false;
         vm.isEdit = [];
+        let emptyUser = {
+            role: 'user'
+        };
+        vm.newUser = _.extend({}, emptyUser);
 
         vm.remove = remove;
         vm.edit = edit;
         vm.saveUser = save;
+        vm.create = create;
+        vm.checkTrue = elem => elem;
 
-        function remove(user) {
-            if(confirm('Ви дійсно хочете видалити користувача: ' + user.name + ' ' + user.surname)) {
-                user.delete(user.objectId);
+        function remove(userData, index) {
+            if(confirm('Ви дійсно хочете видалити користувача: ' + userData.name + ' ' + userData.surname)) {
+                user.delete(userData.objectId)
+                    .then(() => {
+                        toastr.success('Користувача видалено');
+                        vm.users.splice(index, 1);
+                    });
             }
         }
 
@@ -37,6 +48,17 @@
                 .then(() => {
                     toastr.success('Дані успішно збережені');
                 });
+        }
+
+        function create() {
+            user.create(vm.newUser)
+                .then((res) => {
+                    toastr.success('Користувача створено');
+                    vm.users.push(_.extend({}, vm.newUser, res));
+                    vm.newUser = _.extend({}, emptyUser);
+                    vm.isCreate = false;
+                })
+
         }
     }
 })();
