@@ -12,12 +12,21 @@
 
 
         return {
-            all: all
+            all: all,
+            get: get
         };
 
-        function all(data) {
+        function all() {
             return http.get(url.group)
                         .then(res => res.results)
+        }
+
+        function get(groupId) {
+            return http.get(url.group, {
+                where: {
+                    "objectId": groupId
+                }
+            }).then(res => res.results[0])
         }
     }
 })();

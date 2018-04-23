@@ -1,9 +1,15 @@
 <div class="text-center font-weight-bold mt-1 mb-2">
-    {{ vm.course.name }}
+    {{ vm.course.name }}.
+    {{ vm.tab != 'groups' ? 'Лекції' : 'Групи' }}
 </div>
 <div class=" col-md-8 offset-md-2">
-    <div class="text-right" ng-click="vm.changeTab()">
-        <i class="fa-cog fa"></i>
+    <div class="text-right">
+        <a class="cursor-pointer pl-1 mr-2" ng-click="vm.addSmth = !vm.addSmth">
+            <i class="fa-plus fa"></i>
+        </a>
+        <a class="cursor-pointer pr-2" ng-click="vm.changeTab()">
+            <i class="fa-cog fa"></i>
+        </a>
     </div>
     <div class="list-group" ng-if="vm.tab == 'lessons'">
         <a href="#" class="list-group-item"
@@ -17,8 +23,25 @@
         <div ng-if="!vm.lessons.length">Жодного курсу не знайдено ☹</div>
     </div>
 
-    <div ng-if="vm.tab == 'users'">
-        users
+    <div ng-if="vm.tab == 'groups'">
+        <span ng-if="!vm.groups">Завантаження...</span>
+        <div class="list-group mb-1" ng-if="vm.addSmth">
+            <select class="list-group-item" ng-model="vm.newGroupId">
+                <option value="" disabled>Оберіть групу</option>
+                <option ng-repeat="group in vm.allGroups | filter:vm.notContain(vm.groups)" ng-value="group.objectId">{{group.name}}</option>
+            </select>
+            <div class="btn btn-primary" ng-click="vm.addGroup()">
+                Додати групу
+            </div>
+        </div>
+        <div class="list-group">
+            <div class="list-group-item" ng-repeat="group in vm.groups">
+                {{ group.name }}
+                <a class="cursor-pointer" ng-click="vm.removeGroup(group, $index)">
+                    <i class="fa fa-remove"></i>
+                </a>
+            </div>
+        </div>
     </div>
 
 </div>

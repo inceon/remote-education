@@ -6,15 +6,16 @@
         .service('courses', courses);
 
 
-    courses.$inject = ['http', 'url', '$rootScope'];
+    courses.$inject = ['http', 'url', '$q', 'group'];
 
-    function courses(http, url, $rootScope) {
+    function courses(http, url, $q, group) {
 
         return {
             all: all,
             allMy: allMy,
             get: get,
-            lessons: lessons
+            lessons: lessons,
+            groups: groups
         };
 
         function all(data) {
@@ -46,6 +47,18 @@
                     "course": courseId
                 }
             }).then(res => res.results);
+        }
+
+        function groups(courseId) {
+            return http.get(url.group_course, {
+                where: {
+                    "course": courseId
+                }
+            }).then((res) => {
+                return $q.all(res.results.map((instance) => {
+                    return group.get(instance.group);
+                }))
+            })
         }
     }
 })();
