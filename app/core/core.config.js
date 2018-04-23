@@ -1,17 +1,14 @@
 ;(function () {
     angular
         .module('app')
-        .config(mainConfig)
-    // .config(['$mdIconProvider', function ($mdIconProvider) {
-    //     $mdIconProvider
-    //         .iconSet('social', 'bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-content-symbol.svg', 24)
-    //         .defaultIconSet('bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-content-symbol.svg', 24);
-    // }]);
+        .config(mainConfig);
 
-    mainConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
-    function mainConfig($stateProvider, $urlRouterProvider) {
+    mainConfig.$inject = ['$stateProvider', '$urlRouterProvider', 'markedProvider'];
 
+    function mainConfig($stateProvider, $urlRouterProvider, markedProvider) {
+
+        markedProvider.setOptions({gfm: true});
 
         $urlRouterProvider.otherwise('/home');
 

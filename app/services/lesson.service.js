@@ -11,7 +11,8 @@
     function lesson(http, url, $rootScope) {
 
         return {
-            get: get
+            get: get,
+            save: save
         };
 
         function get(lessonId) {
@@ -21,6 +22,12 @@
                 }
             })
             .then(res => res.results[0])
+        }
+
+        function save(lesson) {
+            return http.put(url.lessons + '/' + lesson.objectId, {
+                text: lesson.text
+            });
         }
     }
 })();

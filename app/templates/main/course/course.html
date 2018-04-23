@@ -1,7 +1,7 @@
 <div class="text-center font-weight-bold mt-1 mb-2">
     {{ vm.course.name }}
 </div>
-<div class="list-group">
+<div class="list-group col-md-8 offset-md-2">
     <a href="#" class="list-group-item"
        ng-repeat="lesson in vm.lessons"
        ui-sref="main.lesson({lesson: lesson, id: lesson.objectId})"

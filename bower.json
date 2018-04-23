@@ -15,7 +15,8 @@
     "angular-toastr": "^2.1.1",
     "bootstrap": "^4.1.0",
     "ngstorage": "^0.3.11",
-    "angular-sanitize": "^1.6.10"
+    "angular-sanitize": "^1.6.10",
+    "angular-marked": "^1.2.2"
   },
   "resolutions": {
     "angular": "^1.0.8"
