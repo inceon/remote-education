@@ -1,14 +1,24 @@
 <div class="text-center font-weight-bold mt-1 mb-2">
     {{ vm.course.name }}
 </div>
-<div class="list-group col-md-8 offset-md-2">
-    <a href="#" class="list-group-item"
-       ng-repeat="lesson in vm.lessons"
-       ui-sref="main.lesson({lesson: lesson, id: lesson.objectId})"
-    >
-        {{ $index+1 }}. {{ lesson.name }}
-        <p ng-if="lesson.showText" class="p-2 mt-2" style="border: dotted 1px gray" ng-bind-html="lesson.text"></p>
-    </a>
+<div class=" col-md-8 offset-md-2">
+    <div class="text-right" ng-click="vm.changeTab()">
+        <i class="fa-cog fa"></i>
+    </div>
+    <div class="list-group" ng-if="vm.tab == 'lessons'">
+        <a href="#" class="list-group-item"
+           ng-repeat="lesson in vm.lessons"
+           ui-sref="main.lesson({lesson: lesson, id: lesson.objectId})"
+        >
+            {{ $index+1 }}. {{ lesson.name }}
+            <p ng-if="lesson.showText" class="p-2 mt-2" style="border: dotted 1px gray" ng-bind-html="lesson.text"></p>
+        </a>
 
-    <div ng-if="!vm.lessons.length">Жодного курсу не знайдено ☹</div>
+        <div ng-if="!vm.lessons.length">Жодного курсу не знайдено ☹</div>
+    </div>
+
+    <div ng-if="vm.tab == 'users'">
+        users
+    </div>
+
 </div>

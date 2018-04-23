@@ -14,7 +14,7 @@
             user    : baseUrl + 'Users',
             group   : baseUrl + 'Group',
             courses : baseUrl + 'Courses',
-            user_course : baseUrl + 'User_Course',
+            group_course : baseUrl + 'Group_Course',
             lessons : baseUrl + 'Lessons'
         };
     }

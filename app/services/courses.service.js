@@ -12,7 +12,7 @@
 
         return {
             all: all,
-            userAll: userAll,
+            allMy: allMy,
             get: get,
             lessons: lessons
         };
@@ -22,10 +22,10 @@
                         .then(res => res.results)
         }
 
-        function userAll(user) {
-            return http.get(url.user_course, {
+        function allMy(group) {
+            return http.get(url.group_course, {
                 where: {
-                    "user": user
+                    "group": group
                 }
             })
             .then(res => res.results)
