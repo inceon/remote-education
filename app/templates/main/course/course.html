@@ -2,13 +2,13 @@
     {{ vm.course.name }}
 </div>
 <div class="list-group">
-    <div class="list-group-item cursor-pointer"
-          ng-repeat="lesson in vm.lessons"
-          ng-click="lesson.showText = !lesson.showText"
+    <a href="#" class="list-group-item"
+       ng-repeat="lesson in vm.lessons"
+       ui-sref="main.lesson({lesson: lesson, id: lesson.objectId})"
     >
         {{ $index+1 }}. {{ lesson.name }}
         <p ng-if="lesson.showText" class="p-2 mt-2" style="border: dotted 1px gray" ng-bind-html="lesson.text"></p>
-    </div>
+    </a>
 
     <div ng-if="!vm.lessons.length">Жодного курсу не знайдено ☹</div>
 </div>

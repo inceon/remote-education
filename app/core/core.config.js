@@ -59,6 +59,15 @@
                     }
                 }
             })
+            .state('main.lesson', {
+                url: '/lesson/:id',
+                templateUrl: 'templates/main/course/lesson/lesson.html',
+                controller: 'LessonController',
+                controllerAs: 'vm',
+                params: {
+                    lesson: null
+                }
+            })
             .state('main.admin', {
                 url: '/admin',
                 templateUrl: 'templates/main/admin/admin.html',

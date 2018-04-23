@@ -14,15 +14,16 @@
             token: 'dsBJyP5VRbxNZgMQEfX5RzqyMpOLFBRa713w0l1j'
         });
 
-    runBlock.$inject = ['$localStorage', 'user', '$rootScope'];
+    runBlock.$inject = ['$localStorage', 'user', '$rootScope', '$state'];
 
-    function runBlock($localStorage, user, $rootScope) {
+    function runBlock($localStorage, user, $rootScope, $state) {
 
         if($localStorage.userId) {
 
             user.one($localStorage.userId)
                 .then((res) => {
                     $rootScope.user = res;
+                    $state.go('main.dashboard');
                 })
 
         }

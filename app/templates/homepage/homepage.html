@@ -5,4 +5,5 @@
     </h5>
 
     <a ng-if="!$root.user" ui-sref="login" href="#">Ввійдіть на сайт</a>
+    <a ng-if="$root.user" ui-sref="main.dashboard" href="#">Перейти до курсів</a>
 </div>
