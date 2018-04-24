@@ -13,7 +13,7 @@
         vm.lesson = $stateParams.lesson;
         vm.saveText = saveText;
         vm.changeEdit = changeEdit;
-        vm.isEdit = true;
+        vm.isEdit = false;
 
         if(_.isEmpty(vm.lesson)) {
             lesson.get($stateParams.id)

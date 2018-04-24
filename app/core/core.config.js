@@ -33,7 +33,7 @@
                 controllerAs: 'vm',
                 resolve: {
                     courses_user: function (courses, $rootScope) {
-                        return courses.allMy($rootScope.group);
+                        return courses.allMy($rootScope.user.group);
                     },
                     coursesData: function ($q, courses_user, courses) {
                         return $q.all(courses_user.map((course_user) => {
