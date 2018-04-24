@@ -18,6 +18,7 @@
         vm.removeGroup = removeGroup;
         vm.notContain = notContain;
         vm.addGroup = addGroup;
+        vm.saveCourseName = saveCourseName;
 
         if(_.isEmpty(vm.course)) {
             courses.get($stateParams.id)
@@ -40,7 +41,7 @@
 
         function removeGroup(groupData, index) {
             if(confirm('Ви дійсно хочете видалити групу: ' + groupData.name + '?')) {
-                group.delete(groupData.objectId)
+                courses.deleteGroup(groupData.id)
                     .then(() => {
                         toastr.success('Групу видалено');
                         vm.groups.splice(index, 1);
@@ -66,6 +67,13 @@
                     group.get(vm.newGroupId)
                         .then((res) => vm.groups.push(res));
                 })
+        }
+
+        function saveCourseName() {
+            courses.update($stateParams.id, {
+                name: vm.course.name
+            })
+            .then(() => toastr.success('Назва успішно збережена'));
         }
 
     }

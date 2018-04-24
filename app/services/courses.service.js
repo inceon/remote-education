@@ -13,10 +13,12 @@
         return {
             all: all,
             allMy: allMy,
+            update: update,
             get: get,
             lessons: lessons,
             groups: groups,
-            addGroup: addGroup
+            addGroup: addGroup,
+            deleteGroup: deleteGroup
         };
 
         function all(data) {
@@ -31,6 +33,11 @@
                 }
             })
             .then(res => res.results)
+        }
+
+        function update(id, data) {
+            return http.put(url.courses + '/' + id, data)
+                        .then(res => res.results)
         }
 
         function get(courseId) {
@@ -57,7 +64,10 @@
                 }
             }).then((res) => {
                 return $q.all(res.results.map((instance) => {
-                    return group.get(instance.group);
+                    return group.get(instance.group)
+                        .then(res => _.extend({}, res, {
+                            id: instance.objectId
+                        }));
                 }))
             })
         }
@@ -67,6 +77,10 @@
                 group: groupId,
                 course: courseId
             });
+        }
+
+        function deleteGroup(groupCourseId) {
+            return http.delete(url.group_course + '/' + groupCourseId);
         }
     }
 })();

@@ -1,6 +1,19 @@
 <div class="text-center font-weight-bold mt-1 mb-2">
-    {{ vm.course.name }}.
-    {{ vm.tab != 'groups' ? 'Лекції' : 'Групи' }}
+    <span ng-if="!vm.editName">
+        {{ vm.course.name }}.
+        {{ vm.tab != 'groups' ? 'Лекції' : 'Групи' }}
+
+    </span>
+    <span ng-if="vm.editName">
+        <input type="text" ng-model="vm.course.name">
+    </span>
+    <a class="cursor-pointer ml-2" ng-if="vm.editName" ng-click="vm.saveCourseName()">
+        <i class="fa fa-save"></i>
+    </a>
+    <a class="cursor-pointer ml-2" ng-click="vm.editName = !vm.editName">
+        <i ng-show="!vm.editName" class="fa fa-pencil"></i>
+        <i ng-show="vm.editName" class="fa fa-remove"></i>
+    </a>
 </div>
 <div class=" col-md-8 offset-md-2">
     <div class="text-right">
