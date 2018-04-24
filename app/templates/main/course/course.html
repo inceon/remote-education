@@ -37,9 +37,15 @@
         <div class="list-group">
             <a href="#" class="list-group-item"
                ng-repeat="lesson in vm.lessons"
-               ui-sref="main.lesson({lesson: lesson, id: lesson.objectId})"
             >
-                {{ $index+1 }}. {{ lesson.name }}
+                <span ng-click="vm.goToLesson({lesson: lesson, id: lesson.objectId})">
+                    {{ $index+1 }}. {{ lesson.name }}
+                </span>
+                <span class="cursor-pointer pl-2 pr-2"
+                      style="float: right; border: 1px solid #ccc; border-radius: 50%"
+                      ng-click="vm.removeLesson(lesson, $index, $event);">
+                    <i class="fa fa-remove"></i>
+                </span>
             </a>
 
             <div ng-if="!vm.lessons.length">Жодного курсу не знайдено ☹</div>

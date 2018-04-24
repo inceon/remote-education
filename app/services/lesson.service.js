@@ -13,7 +13,8 @@
         return {
             get: get,
             save: save,
-            add: add
+            add: add,
+            delete: deleteL
         };
 
         function get(lessonId) {
@@ -37,6 +38,10 @@
                 name: name,
                 text: '### Ви можете змінити текст цього курсу'
             });
+        }
+
+        function deleteL(lessonId) {
+            return http.delete(url.lessons + '/' + lessonId);
         }
     }
 })();
