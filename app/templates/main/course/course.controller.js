@@ -4,9 +4,9 @@
     angular.module('app')
         .controller('CourseController', CourseController);
 
-    CourseController.$inject = ['lessons', '$stateParams', 'courses', 'group'];
+    CourseController.$inject = ['lessons', '$stateParams', 'courses', 'group', 'toastr'];
 
-    function CourseController(lessons, $stateParams, courses, group) {
+    function CourseController(lessons, $stateParams, courses, group, toastr) {
         let vm = this;
 
         vm.lessons = lessons;
@@ -14,8 +14,10 @@
         vm.tab = 'lessons';
         vm.changeTab = changeTab;
         vm.groups = undefined;
+        vm.newGroupId = undefined;
         vm.removeGroup = removeGroup;
         vm.notContain = notContain;
+        vm.addGroup = addGroup;
 
         if(_.isEmpty(vm.course)) {
             courses.get($stateParams.id)
@@ -55,6 +57,15 @@
                 }
                 return true;
             }
+        }
+
+        function addGroup() {
+            courses.addGroup($stateParams.id, vm.newGroupId)
+                .then(() => {
+                    toastr.success('Группа успішно додана');
+                    group.get(vm.newGroupId)
+                        .then((res) => vm.groups.push(res));
+                })
         }
 
     }

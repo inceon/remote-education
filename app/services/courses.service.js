@@ -15,7 +15,8 @@
             allMy: allMy,
             get: get,
             lessons: lessons,
-            groups: groups
+            groups: groups,
+            addGroup: addGroup
         };
 
         function all(data) {
@@ -59,6 +60,13 @@
                     return group.get(instance.group);
                 }))
             })
+        }
+
+        function addGroup(courseId, groupId) {
+            return http.post(url.group_course, {
+                group: groupId,
+                course: courseId
+            });
         }
     }
 })();
