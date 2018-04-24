@@ -4,20 +4,22 @@
     angular.module('app')
         .controller('CourseController', CourseController);
 
-    CourseController.$inject = ['lessons', '$stateParams', 'courses', 'group', 'toastr'];
+    CourseController.$inject = ['lessons', 'lesson', '$stateParams', 'courses', 'group', 'toastr'];
 
-    function CourseController(lessons, $stateParams, courses, group, toastr) {
+    function CourseController(lessons, lesson, $stateParams, courses, group, toastr) {
         let vm = this;
 
         vm.lessons = lessons;
         vm.course = $stateParams.course;
         vm.tab = 'lessons';
-        vm.changeTab = changeTab;
         vm.groups = undefined;
         vm.newGroupId = undefined;
+
+        vm.changeTab = changeTab;
         vm.removeGroup = removeGroup;
         vm.notContain = notContain;
         vm.addGroup = addGroup;
+        vm.addLesson = addLesson;
         vm.saveCourseName = saveCourseName;
 
         if(_.isEmpty(vm.course)) {
@@ -65,7 +67,23 @@
                 .then(() => {
                     toastr.success('Группа успішно додана');
                     group.get(vm.newGroupId)
-                        .then((res) => vm.groups.push(res));
+                        .then((res) => {
+                            vm.groups.push(res);
+                            vm.newGroupId = undefined;
+                        });
+                })
+        }
+
+        function addLesson() {
+            lesson.add($stateParams.id, vm.newLessonName)
+                .then((res) => {
+                    toastr.success('Лекція успішно додана');
+                    vm.lessons.push({
+                        name: vm.newLessonName,
+                        course: $stateParams.id,
+                        objectId: res.objectId
+                    });
+                    vm.newLessonName = undefined;
                 })
         }
 

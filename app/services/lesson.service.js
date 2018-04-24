@@ -12,7 +12,8 @@
 
         return {
             get: get,
-            save: save
+            save: save,
+            add: add
         };
 
         function get(lessonId) {
@@ -27,6 +28,14 @@
         function save(lesson) {
             return http.put(url.lessons + '/' + lesson.objectId, {
                 text: lesson.text
+            });
+        }
+
+        function add(courseId, name) {
+            return http.post(url.lessons, {
+                course: courseId,
+                name: name,
+                text: '### Ви можете змінити текст цього курсу'
             });
         }
     }

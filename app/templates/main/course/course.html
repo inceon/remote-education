@@ -24,16 +24,26 @@
             <i class="fa-cog fa"></i>
         </a>
     </div>
-    <div class="list-group" ng-if="vm.tab == 'lessons'">
-        <a href="#" class="list-group-item"
-           ng-repeat="lesson in vm.lessons"
-           ui-sref="main.lesson({lesson: lesson, id: lesson.objectId})"
-        >
-            {{ $index+1 }}. {{ lesson.name }}
-            <p ng-if="lesson.showText" class="p-2 mt-2" style="border: dotted 1px gray" ng-bind-html="lesson.text"></p>
-        </a>
 
-        <div ng-if="!vm.lessons.length">Жодного курсу не знайдено ☹</div>
+    <!--TABS-->
+
+    <div ng-if="vm.tab == 'lessons'">
+        <div class="list-group mb-1" ng-if="vm.addSmth">
+            <input class="list-group-item" ng-model="vm.newLessonName" placeholder="Назва...">
+            <div class="btn btn-primary" ng-click="vm.addLesson()">
+                Додати лекцію
+            </div>
+        </div>
+        <div class="list-group">
+            <a href="#" class="list-group-item"
+               ng-repeat="lesson in vm.lessons"
+               ui-sref="main.lesson({lesson: lesson, id: lesson.objectId})"
+            >
+                {{ $index+1 }}. {{ lesson.name }}
+            </a>
+
+            <div ng-if="!vm.lessons.length">Жодного курсу не знайдено ☹</div>
+        </div>
     </div>
 
     <div ng-if="vm.tab == 'groups'">
