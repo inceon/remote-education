@@ -28,7 +28,7 @@
         <tr ng-repeat="course in vm.courses">
             <th scope="row">{{ $index+1 }}</th>
             <td>
-                <span ng-if="!vm.isEdit[$index]">{{ course.name }}</span>
+                <a href="#" ui-sref="main.course({id: course.objectId})" ng-if="!vm.isEdit[$index]">{{ course.name }}</a>
                 <input type="text" name="name" ng-model="course.name" ng-if="vm.isEdit[$index]">
             </td>
             <td>
