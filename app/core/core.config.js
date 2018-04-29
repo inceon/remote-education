@@ -69,10 +69,27 @@
                 url: '/admin',
                 templateUrl: 'templates/main/admin/admin.html',
                 controller: 'AdminController',
+                controllerAs: 'vm'
+            })
+            .state('main.admin.users', {
+                url: '/users',
+                templateUrl: 'templates/main/admin/users/users.html',
+                controller: 'UsersAdminController',
                 controllerAs: 'vm',
                 resolve: {
                     usersList: function (user) {
                         return user.all();
+                    }
+                }
+            })
+            .state('main.admin.courses', {
+                url: '/courses',
+                templateUrl: 'templates/main/admin/courses/courses.html',
+                controller: 'CoursesAdminController',
+                controllerAs: 'vm',
+                resolve: {
+                    coursesList: function (courses) {
+                        return courses.all();
                     }
                 }
             })

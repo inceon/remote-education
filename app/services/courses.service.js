@@ -13,8 +13,10 @@
         return {
             all: all,
             allMy: allMy,
-            update: update,
+            save: save,
             get: get,
+            delete: deleteC,
+            create: create,
             lessons: lessons,
             groups: groups,
             addGroup: addGroup,
@@ -35,9 +37,14 @@
             .then(res => res.results)
         }
 
-        function update(id, data) {
-            return http.put(url.courses + '/' + id, data)
-                        .then(res => res.results)
+        function save(course) {
+            delete course.createdAt;
+            delete course.updatedAt;
+            return http
+                .put(url.courses + '/' + course.objectId, course)
+                .then(function (res) {
+                    return res.results;
+                });
         }
 
         function get(courseId) {
@@ -47,6 +54,19 @@
                 }
             })
             .then(res => res.results[0])
+        }
+
+        function deleteC(courseId) {
+            return http
+                .delete(url.courses + '/' + courseId)
+                .then(function (res) {
+                    return res.results;
+                });
+        }
+
+        function create(course) {
+            return http
+                .post(url.courses, course);
         }
 
         function lessons(courseId) {
