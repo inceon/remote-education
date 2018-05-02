@@ -4,12 +4,13 @@
     angular.module('app')
         .controller('CourseController', CourseController);
 
-    CourseController.$inject = ['lessons', 'lesson', '$stateParams', 'courses', 'group', 'toastr', '$state'];
+    CourseController.$inject = ['lessons', 'tests', 'lesson', '$stateParams', 'courses', 'group', 'toastr', '$state'];
 
-    function CourseController(lessons, lesson, $stateParams, courses, group, toastr, $state) {
+    function CourseController(lessons, tests, lesson, $stateParams, courses, group, toastr, $state) {
         let vm = this;
 
         vm.lessons = lessons;
+        vm.tests = tests;
         vm.course = $stateParams.course;
         vm.tab = 'lessons';
         vm.groups = undefined;
@@ -94,17 +95,21 @@
         }
 
         function addLesson() {
-            lesson.add($stateParams.id, vm.newLessonName)
-                .then((res) => {
-                    toastr.success('Лекція успішно додана');
-                    vm.lessons.push({
-                        name: vm.newLessonName,
-                        course: $stateParams.id,
-                        objectId: res.objectId,
-                        text: '### Ви можете змінити текст цього курсу'
-                    });
-                    vm.newLessonName = undefined;
-                })
+            if(vm.addSmth) {
+                lesson.add($stateParams.id, vm.newName)
+                    .then((res) => {
+                        toastr.success('Лекція успішно додана');
+                        vm.lessons.push({
+                            name: vm.newName,
+                            course: $stateParams.id,
+                            objectId: res.objectId,
+                            text: '### Ви можете змінити текст цього курсу'
+                        });
+                        vm.newName = undefined;
+                    })
+            } else {
+                alert(0);
+            }
         }
 
         function saveCourseName() {

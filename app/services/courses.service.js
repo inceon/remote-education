@@ -18,6 +18,7 @@
             delete: deleteC,
             create: create,
             lessons: lessons,
+            tests: tests,
             groups: groups,
             addGroup: addGroup,
             deleteGroup: deleteGroup
@@ -71,6 +72,14 @@
 
         function lessons(courseId) {
             return http.get(url.lessons, {
+                where: {
+                    "course": courseId
+                }
+            }).then(res => res.results);
+        }
+
+        function tests(courseId) {
+            return http.get(url.tests, {
                 where: {
                     "course": courseId
                 }

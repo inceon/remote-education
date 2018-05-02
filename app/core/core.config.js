@@ -53,7 +53,10 @@
                 resolve: {
                     lessons: function (courses, $stateParams) {
                         return courses.lessons($stateParams.id);
-                    }
+                    },
+                    tests: function (courses, $stateParams) {
+                        return courses.tests($stateParams.id);
+                    },
                 }
             })
             .state('main.lesson', {
