@@ -11,13 +11,33 @@
         let vm = this;
 
         vm.test = $stateParams.test;
+        vm.parsedTest = [];
+        vm.parseTest = parseTest;
         vm.saveText = saveText;
         vm.changeEdit = changeEdit;
         vm.isEdit = false;
 
         if(_.isEmpty(vm.test)) {
             test.get($stateParams.id)
-                  .then(res => vm.test = res);
+                  .then(res => {
+                      vm.test = res;
+                      vm.parseTest();
+                  });
+        } else {
+            vm.parseTest();
+        }
+
+        function parseTest() {
+            _.each(JSON.parse(vm.test['questions']), (question, idx) => {
+                vm.parsedTest[idx] = {};
+                vm.parsedTest[idx]['question'] = question;
+            });
+            _.each(JSON.parse(vm.test['answers']), (answer, idx) => {
+                vm.parsedTest[idx]['answer'] = answer;
+            });
+            _.each(JSON.parse(vm.test['right']), (answer, idx) => {
+                vm.parsedTest[idx]['right'] = answer;
+            });
         }
 
         function saveText() {
