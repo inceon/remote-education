@@ -35,12 +35,12 @@
             </div>
         </div>
         <div class="list-group">
-            <a href="#" class="list-group-item"
+            <div class="list-group-item"
                ng-repeat="lesson in vm.lessons"
             >
-                <span ng-click="vm.goToLesson({lesson: lesson, id: lesson.objectId})">
+                <a href="" ng-click="vm.goToLesson({lesson: lesson, id: lesson.objectId})">
                     {{ $index+1 }}. {{ lesson.name }}
-                </span>
+                </a>
                 <span class="cursor-pointer pl-2 pr-2"
                       style="float: right; border: 1px solid #ccc; border-radius: 50%"
                       ng-click="vm.removeLesson(lesson, $index, $event);">
