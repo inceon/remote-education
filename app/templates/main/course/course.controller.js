@@ -100,7 +100,8 @@
                     vm.lessons.push({
                         name: vm.newLessonName,
                         course: $stateParams.id,
-                        objectId: res.objectId
+                        objectId: res.objectId,
+                        text: '### Ви можете змінити текст цього курсу'
                     });
                     vm.newLessonName = undefined;
                 })
