@@ -4,9 +4,9 @@
     angular.module('app')
         .controller('CourseController', CourseController);
 
-    CourseController.$inject = ['lessons', 'tests', 'lesson', '$stateParams', 'courses', 'group', 'toastr', '$state'];
+    CourseController.$inject = ['lessons', 'tests', 'test', 'lesson', '$stateParams', 'courses', 'group', 'toastr', '$state'];
 
-    function CourseController(lessons, tests, lesson, $stateParams, courses, group, toastr, $state) {
+    function CourseController(lessons, tests, test, lesson, $stateParams, courses, group, toastr, $state) {
         let vm = this;
 
         vm.lessons = lessons;
@@ -16,7 +16,6 @@
         vm.groups = undefined;
         vm.newGroupId = undefined;
 
-        vm.goToLesson = goToLesson;
         vm.changeTab = changeTab;
         vm.removeGroup = removeGroup;
         vm.removeLesson = removeLesson;
@@ -28,10 +27,6 @@
         if(_.isEmpty(vm.course)) {
             courses.get($stateParams.id)
                 .then(res => vm.course = res);
-        }
-
-        function goToLesson(data) {
-            $state.go('main.lesson', data);
         }
 
         function changeTab() {
@@ -67,6 +62,19 @@
                     .then(() => {
                         toastr.success('Лекцію видалено');
                         vm.lessons.splice(index, 1);
+                    });
+            }
+        }
+
+        function removeTest(testData, index, event) {
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+
+            if(confirm('Ви дійсно хочете видалити тест: ' + testData.name + '?')) {
+                test.delete(testData.objectId)
+                    .then(() => {
+                        toastr.success('Тест видалено');
+                        vm.tests.splice(index, 1);
                     });
             }
         }

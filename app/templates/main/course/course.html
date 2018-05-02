@@ -44,7 +44,7 @@
             <div class="list-group-item"
                ng-repeat="lesson in vm.lessons"
             >
-                <a href="" ng-click="vm.goToLesson({lesson: lesson, id: lesson.objectId})">
+                <a href="" ui-sref="main.lesson({test: test, id: test.objectId})">
                     {{ $index+1 }}. {{ lesson.name }}
                 </a>
                 <span class="cursor-pointer pl-2 pr-2"
@@ -52,9 +52,24 @@
                       ng-click="vm.removeLesson(lesson, $index, $event);">
                     <i class="fa fa-remove"></i>
                 </span>
-            </a>
+            </div>
 
             <div ng-if="!vm.lessons.length">Жодної лекції не знайдено ☹</div>
+        </div>
+        <div class="list-group">
+            <b>Тести</b>
+            <div class="list-group-item"
+                 ng-repeat="test in vm.tests"
+            >
+                <a href="" ui-sref="main.test({test: test, id: test.objectId})">
+                    {{ $index+1 }}. {{ test.name }}
+                </a>
+                <span class="cursor-pointer pl-2 pr-2"
+                      style="float: right; border: 1px solid #ccc; border-radius: 50%"
+                      ng-click="vm.removeTest(test, $index, $event);">
+                    <i class="fa fa-remove"></i>
+                </span>
+            </div>
         </div>
     </div>
 

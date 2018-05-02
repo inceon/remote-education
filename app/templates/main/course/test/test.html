@@ -1,0 +1,19 @@
+<div class="row pl-3 pr-3">
+    <div class="col-md-6" ng-if="vm.isEdit">
+        <textarea rows="20" style="width: 100%; height: 100%" ng-model="vm.lesson.text"></textarea>
+    </div>
+    <div ng-class="{'col-md-6':vm.isEdit, 'col-md-10 offset-md-1':!vm.isEdit}" style="border: 1px solid #ccc; border-radius: 10px;" class="p-2">
+        <div class="text-right" ng-if="!vm.isEdit && $root.user.role == 'teacher' || true" ng-click="vm.changeEdit()">
+            <div class="btn">
+                <i class="fa fa-pencil"></i> Редагувати
+            </div>
+        </div>
+        <div style="width: 100%; height: 100%" marked="vm.lesson.text"></div>
+    </div>
+    <div class="col-md-10 btn btn-primary btn-block mt-1" ng-if="vm.isEdit" ng-click="vm.saveText()">
+        Зберегти
+    </div>
+    <div class="col-md-2 btn btn-secondary btn-block mt-1" ng-if="vm.isEdit" ng-click="vm.changeEdit()">
+        <i class="fa fa-times"></i>
+    </div>
+</div>
