@@ -56,7 +56,7 @@
 
             <div ng-if="!vm.lessons.length">Жодної лекції не знайдено ☹</div>
         </div>
-        <div class="list-group">
+        <div class="list-group" ng-if="vm.tests.length">
             <b>Тести</b>
             <div class="list-group-item"
                  ng-repeat="test in vm.tests"
