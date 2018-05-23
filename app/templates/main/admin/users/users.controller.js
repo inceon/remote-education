@@ -5,12 +5,24 @@
         .controller('UsersAdminController', UsersAdminController);
 
 
-    UsersAdminController.$inject = ['usersList', '$rootScope', 'user', 'toastr'];
+    UsersAdminController.$inject = ['usersList', 'group', 'user', 'toastr'];
 
-    function UsersAdminController(usersList, $rootScope, user, toastr) {
+    function UsersAdminController(usersList, group, user, toastr) {
         let vm = this;
 
         vm.users = usersList;
+        vm.groups = [];
+
+        group.all()
+            .then(res => vm.groups = res);
+
+        _.each(vm.users, user => {
+            group.get(user.group)
+                .then(res => user.group = res);
+        });
+
+
+
         vm.isCreate = false;
         vm.isEdit = [];
         let emptyUser = {
@@ -40,14 +52,20 @@
 
         function save(userData, index) {
             vm.isEdit[index] = false;
-            user.save(userData)
+            user.save(_.extend({}, userData, {
+                group: userData.group.objectId
+            }))
                 .then(() => {
                     toastr.success('Дані успішно збережені');
                 });
         }
 
         function create() {
-            user.create(vm.newUser)
+            user.create(
+                _.extend({}, vm.newUser, {
+                    group: vm.newUser.group.objectId
+                })
+            )
                 .then((res) => {
                     toastr.success('Користувача створено');
                     vm.users.push(_.extend({}, vm.newUser, res));

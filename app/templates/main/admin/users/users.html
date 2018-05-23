@@ -30,7 +30,9 @@
                 <input name="email" ng-model="vm.newUser.email" title="email">
             </td>
             <td>
-                <input name="group" ng-model="vm.newUser.group" title="group">
+                <select ng-model="vm.newUser.group">
+                    <option ng-value="group" ng-repeat="group in vm.groups">{{group.name}}</option>
+                </select>
             </td>
             <td>
                 <select ng-model="vm.newUser.role" title="role">
@@ -63,8 +65,10 @@
                 <input type="text" name="email" ng-model="user.email" ng-if="vm.isEdit[$index]">
             </td>
             <td>
-                <span ng-if="!vm.isEdit[$index]">{{ user.group }}</span>
-                <input type="text" name="group" ng-model="user.group" ng-if="vm.isEdit[$index]">
+                <span ng-if="!vm.isEdit[$index]">{{ user.group.name }}</span>
+                <select ng-model="user.group" ng-if="vm.isEdit[$index]">
+                    <option ng-value="group" ng-repeat="group in vm.groups">{{group.name}}</option>
+                </select>
             </td>
             <td>
                 <span ng-if="!vm.isEdit[$index]">{{ user.role }}</span>
