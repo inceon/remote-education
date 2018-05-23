@@ -13,6 +13,7 @@
         vm.test = $stateParams.test;
         vm.parsedTest = [];
         vm.userAnswers = [];
+        vm.userResult = undefined;
         vm.parseTest = parseTest;
         vm.saveText = saveText;
         vm.changeEdit = changeEdit;
@@ -30,17 +31,25 @@
         }
 
         function parseTest() {
-            _.each(JSON.parse(vm.test['questions']), (question, idx) => {
-                vm.parsedTest[idx] = {};
-                vm.parsedTest[idx]['question'] = question;
-            });
-            _.each(JSON.parse(vm.test['answers']), (answer, idx) => {
-                vm.parsedTest[idx]['answer'] = answer;
-            });
-            _.each(JSON.parse(vm.test['right']), (answer, idx) => {
-                vm.parsedTest[idx]['right'] = answer;
-                vm.userAnswers[idx] = -1;
-            });
+
+            test.result.get($stateParams.id)
+                .then(res => {
+                    if(!_.isEmpty(res)) {
+                        vm.userResult = res;
+                    } else {
+                        _.each(JSON.parse(vm.test['questions']), (question, idx) => {
+                            vm.parsedTest[idx] = {};
+                            vm.parsedTest[idx]['question'] = question;
+                        });
+                        _.each(JSON.parse(vm.test['answers']), (answer, idx) => {
+                            vm.parsedTest[idx]['answer'] = answer;
+                        });
+                        _.each(JSON.parse(vm.test['right']), (answer, idx) => {
+                            vm.parsedTest[idx]['right'] = answer;
+                            vm.userAnswers[idx] = -1;
+                        });
+                    }
+                });
         }
 
         function saveText() {

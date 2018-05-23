@@ -1,5 +1,11 @@
 <div class="row pl-3 pr-3">
-    <div class=" col-md-8 offset-md-2">
+    <div class=" col-md-8 offset-md-2" ng-if="vm.userResult">
+        <div class="list-group">
+            Ви вже раніше відправляли відповідь. <br>
+            Ваш результат: {{ vm.userResult.result }}
+        </div>
+    </div>
+    <div class=" col-md-8 offset-md-2" ng-if="!vm.userResult">
         <div class="list-group">
             <div class="list-group-item" ng-repeat="test in vm.parsedTest">
 
