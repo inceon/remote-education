@@ -1,12 +1,18 @@
 <div class="row pl-3 pr-3">
-    <div class=" col-md-8 offset-md-2" ng-if="vm.userResult">
-        <div class="list-group">
+    <div class="col-md-8 offset-md-2">
+        <div class="text-right">
+            <a class="btn cursor-pointer pl-1 mr-2" ui-sref="main.test_result({id: vm.test.objectId})">
+                Результати
+                <i class="fa-list fa"></i>
+            </a>
+        </div>
+
+        <div class="list-group" ng-if="vm.userResult">
             Ви вже раніше відправляли відповідь. <br>
             Ваш результат: {{ vm.userResult.result }}
         </div>
-    </div>
-    <div class=" col-md-8 offset-md-2" ng-if="!vm.userResult">
-        <div class="list-group">
+
+        <div class="list-group" ng-if="!vm.userResult">
             <div class="list-group-item" ng-repeat="test in vm.parsedTest">
 
                 <div style="color: dodgerblue">
@@ -19,9 +25,9 @@
                             > {{answer}}</label>
                 </div>
             </div>
-        </div>
-        <div class="btn btn-primary col-md-12" ng-click="vm.sendAnswers()">
-            Надіслати відповідь
+            <div class="btn btn-primary col-md-12" ng-click="vm.sendAnswers()">
+                Надіслати відповідь
+            </div>
         </div>
     </div>
 </div>

@@ -77,6 +77,17 @@
                     test: null
                 }
             })
+            .state('main.test_result', {
+                url: '/test/:id/result',
+                templateUrl: 'templates/main/course/test_results/test_results.html',
+                controller: 'TestResultsController',
+                controllerAs: 'vm',
+                resolve: {
+                    resultsData: function (test, $stateParams) {
+                        return test.result.all($stateParams.id);
+                    }
+                }
+            })
             .state('main.admin', {
                 url: '/admin',
                 templateUrl: 'templates/main/admin/admin.html',

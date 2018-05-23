@@ -17,7 +17,8 @@
             delete: deleteT,
             result: {
                 send: result_send,
-                get : result_get
+                get : result_get,
+                all : results_all
             }
         };
 
@@ -60,6 +61,14 @@
                     "user": $localStorage.userId
                 }
             }).then(res => res.results[0]);
+        }
+
+        function results_all(testId) {
+            return http.get(url.test_result, {
+                where: {
+                    "test": testId
+                }
+            }).then(res => res.results);
         }
     }
 })();
