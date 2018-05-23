@@ -7,7 +7,10 @@
                     {{ $index+1 }}. {{ test.question }}
                 </div>
                 <div class="radio" ng-repeat="answer in test.answer">
-                    <label><input type="radio" name="{{$parent.$index}}"> {{answer}}</label>
+                    <label><input type="radio"
+                                  ng-model="vm.userAnswers[$parent.$index]"
+                                  ng-value="$index"
+                            > {{answer}}</label>
                 </div>
             </div>
         </div>

@@ -16,7 +16,8 @@
             courses : baseUrl + 'Courses',
             group_course : baseUrl + 'Group_Course',
             lessons : baseUrl + 'Lessons',
-            tests   : baseUrl + 'Tests'
+            tests   : baseUrl + 'Tests',
+            test_result   : baseUrl + 'Test_result'
         };
     }
 

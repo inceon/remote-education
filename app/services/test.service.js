@@ -6,15 +6,18 @@
         .service('test', test);
 
 
-    test.$inject = ['http', 'url', '$rootScope'];
+    test.$inject = ['http', 'url', '$localStorage'];
 
-    function test(http, url, $rootScope) {
+    function test(http, url, $localStorage) {
 
         return {
             get: get,
             save: save,
             add: add,
-            delete: deleteT
+            delete: deleteT,
+            result: {
+                send: result_send
+            }
         };
 
         function get(testId) {
@@ -39,6 +42,14 @@
 
         function deleteT(testId) {
             return http.delete(url.tests + '/' + testId);
+        }
+
+        function result_send(testId, result) {
+            return http.post(url.test_result, {
+                test: testId,
+                user: $localStorage.userId,
+                result
+            });
         }
     }
 })();

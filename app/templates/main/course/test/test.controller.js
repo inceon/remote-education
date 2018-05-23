@@ -12,9 +12,11 @@
 
         vm.test = $stateParams.test;
         vm.parsedTest = [];
+        vm.userAnswers = [];
         vm.parseTest = parseTest;
         vm.saveText = saveText;
         vm.changeEdit = changeEdit;
+        vm.sendAnswers = sendAnswers;
         vm.isEdit = false;
 
         if(_.isEmpty(vm.test)) {
@@ -37,6 +39,7 @@
             });
             _.each(JSON.parse(vm.test['right']), (answer, idx) => {
                 vm.parsedTest[idx]['right'] = answer;
+                vm.userAnswers[idx] = -1;
             });
         }
 
@@ -49,6 +52,21 @@
 
         function changeEdit() {
             vm.isEdit = !vm.isEdit;
+        }
+
+        function sendAnswers() {
+            let result = 0;
+            _.each(vm.parsedTest, (test, idx) => {
+                if(vm.userAnswers[idx] == test.right) {
+                    result++;
+                }
+            });
+            test.result.send($stateParams.id, result)
+                .then(() => {
+                    toastr.success("Відповідь успішно відправлена");
+                }, () => {
+                    toastr.error("Помилка відправки відповіді");
+                });
         }
     }
 })();
