@@ -122,6 +122,14 @@
                 controller: 'LoginController',
                 controllerAs: 'vm',
             })
+            .state('logout', {
+                url: '/logout',
+                controller: function (user, $state) {
+                    user.logout();
+                    $state.go('home');
+                    return true;
+                }
+            })
 
     }
 
