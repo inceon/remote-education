@@ -3,13 +3,16 @@
         <div class="list-group">
             <div class="list-group-item" ng-repeat="test in vm.parsedTest">
 
-                <a href="">
+                <div style="color: dodgerblue">
                     {{ $index+1 }}. {{ test.question }}
-                </a>
+                </div>
                 <div class="radio" ng-repeat="answer in test.answer">
                     <label><input type="radio" name="{{$parent.$index}}"> {{answer}}</label>
                 </div>
             </div>
+        </div>
+        <div class="btn btn-primary col-md-12" ng-click="vm.sendAnswers()">
+            Надіслати відповідь
         </div>
     </div>
 </div>
