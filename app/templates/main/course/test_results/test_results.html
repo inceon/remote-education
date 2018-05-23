@@ -1,5 +1,26 @@
 <div class="row pl-3 pr-3">
     <div class="col-md-8 offset-md-2">
-        {{vm.results | json}}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Користувач</th>
+                    <th scope="col">Результат</th>
+                    <th scope="col">Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="result in vm.results">
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ result.user.name }} {{ result.user.surname }}</td>
+                    <td>{{ result.result }}</td>
+                    <td>
+                        <span>
+                            <a class="cursor-pointer"><i class="fa fa-remove" ng-click="vm.remove(result, $index)"></i></a>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

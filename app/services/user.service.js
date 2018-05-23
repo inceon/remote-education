@@ -61,9 +61,7 @@
                         "objectId": userId
                     }
                 })
-                .then(function (res) {
-                    return res.results[0];
-                });
+                .then(res => res.results[0]);
         }
         
         function deleteF(userId) {
@@ -76,9 +74,7 @@
 
         function all() {
             return http.get(url.user)
-                .then(function (res) {
-                    return res.results;
-                });
+                .then(res => res.results);
         }
 
         /**

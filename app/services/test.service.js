@@ -18,7 +18,8 @@
             result: {
                 send: result_send,
                 get : result_get,
-                all : results_all
+                all : results_all,
+                del : results_del
             }
         };
 
@@ -69,6 +70,10 @@
                     "test": testId
                 }
             }).then(res => res.results);
+        }
+
+        function results_del(resultId) {
+            return http.delete(url.test_result + '/' + resultId);
         }
     }
 })();
