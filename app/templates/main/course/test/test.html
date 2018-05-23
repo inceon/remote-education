@@ -7,9 +7,8 @@
             </a>
         </div>
 
-        <div class="list-group" ng-if="vm.userResult">
-            Ви вже раніше відправляли відповідь. <br>
-            Ваш результат: {{ vm.userResult.result }}
+        <div class="list-group text-center" ng-if="vm.userResult">
+            <h4>Ваш результат: {{ vm.userResult.result }}</h4>
         </div>
 
         <div class="list-group" ng-if="!vm.userResult">

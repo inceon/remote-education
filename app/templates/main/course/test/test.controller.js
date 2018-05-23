@@ -72,6 +72,9 @@
             });
             test.result.send($stateParams.id, result)
                 .then(() => {
+                    vm.userResult = {
+                        result
+                    };
                     toastr.success("Відповідь успішно відправлена");
                 }, () => {
                     toastr.error("Помилка відправки відповіді");
