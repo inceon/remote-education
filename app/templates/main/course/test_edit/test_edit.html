@@ -1,5 +1,26 @@
 <div class="row pl-3 pr-3">
     <div class="col-md-8 offset-md-2">
-        {{ vm.testData}}
+        <ul class="list-group mb-2 border border-info rounded" ng-repeat="test in vm.parsedTest track by $index">
+            <li class="list-group-item active">
+                <input type="text" class="form-control" ng-model="test.question">
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" ng-repeat="answer in test.answer track by $index">
+                <div class="input-group-prepend">
+                    <input type="radio" class="mr-2"
+                           ng-model="test.right"
+                           ng-value="$index"
+                    >
+                </div>
+                <input type="text" class="form-control mr-2" ng-model="answer">
+                <span class="badge badge-primary badge-pill" ng-if="$index == test.right">✓</span>
+            </li>
+            <li class="list-group-item text-center cursor-pointer" ng-click="vm.addAnswer(test)">
+                Додати відповідь
+            </li>
+        </ul>
+
+        <div class="btn btn-primary col-md-12 mb-5" ng-click="vm.addTest()">
+            Додати тест
+        </div>
     </div>
 </div>

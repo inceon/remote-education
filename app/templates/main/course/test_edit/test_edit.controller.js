@@ -10,18 +10,39 @@
     function TestEdit($stateParams, test, toastr) {
         let vm = this;
 
-        vm.testData = $stateParams.test;
-        vm.remove  = remove;
+        vm.test = $stateParams.test;
+        vm.parsedTest = [];
+        vm.addTest = addTest;
+        vm.addAnswer = addAnswer;
 
+        if(!_.isEmpty(vm.test['questions'])) {
+            _.each(JSON.parse(vm.test['questions']), (question, idx) => {
+                vm.parsedTest[idx] = {};
+                vm.parsedTest[idx]['question'] = question;
+            });
+        }
+        if(!_.isEmpty(vm.test['answers'])) {
+            _.each(JSON.parse(vm.test['answers']), (answer, idx) => {
+                vm.parsedTest[idx]['answer'] = answer;
+            });
+        }
 
-        function remove(resultData, index) {
-            if(confirm('Ви дійсно хочете видалити результат тесту користувача: ' + resultData.user.name + ' ' + resultData.user.surname + '?')) {
-                test.result.del(resultData.objectId)
-                    .then(() => {
-                        toastr.success('Результат видалено');
-                        vm.results.splice(index, 1);
-                    });
-            }
+        if(!_.isEmpty(vm.test['right'])) {
+            _.each(JSON.parse(vm.test['right']), (answer, idx) => {
+                vm.parsedTest[idx]['right'] = answer;
+            });
+        }
+
+        function addTest() {
+            vm.parsedTest.push({
+                question: 'Запитання',
+                answer: [],
+                right: -1
+            });
+        }
+
+        function addAnswer(test) {
+            test.answer.push('Відповідь');
         }
     }
 })();
