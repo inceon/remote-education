@@ -116,7 +116,16 @@
                         vm.newName = undefined;
                     })
             } else {
-                alert(0);
+                test.add($stateParams.id, vm.newName)
+                    .then((res) => {
+                        toastr.success('Тест успішно доданий');
+                        vm.tests.push({
+                            name: vm.newName,
+                            course: $stateParams.id,
+                            objectId: res.objectId
+                        });
+                        vm.newName = undefined;
+                    })
             }
         }
 
