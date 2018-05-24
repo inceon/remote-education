@@ -88,6 +88,15 @@
                     }
                 }
             })
+            .state('main.test_edit', {
+                url: '/test/:id/edit',
+                templateUrl: 'templates/main/course/test_edit/test_edit.html',
+                controller: 'TestEdit',
+                controllerAs: 'vm',
+                params: {
+                    test: null
+                }
+            })
             .state('main.admin', {
                 url: '/admin',
                 templateUrl: 'templates/main/admin/admin.html',
