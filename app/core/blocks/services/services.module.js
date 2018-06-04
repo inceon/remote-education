@@ -6,7 +6,8 @@
         'service.group',
         'service.courses',
         'service.lesson',
-        'service.test'
+        'service.test',
+        'service.file'
     ]);
 
 })();

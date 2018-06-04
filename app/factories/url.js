@@ -9,6 +9,7 @@
 
     function url() {
         var baseUrl = 'https://parseapi.back4app.com/classes/';
+        var fileUrl = 'https://parseapi.back4app.com/files/';
 
         return {
             user    : baseUrl + 'Users',
@@ -17,7 +18,9 @@
             group_course : baseUrl + 'Group_Course',
             lessons : baseUrl + 'Lessons',
             tests   : baseUrl + 'Tests',
-            test_result   : baseUrl + 'Test_result'
+            test_result   : baseUrl + 'Test_result',
+            file     : fileUrl,
+            fileData     : baseUrl + 'Files',
         };
     }
 

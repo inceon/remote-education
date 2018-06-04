@@ -4,13 +4,13 @@
         .module('factory.request', [])
         .factory('http', http);
 
-    http.$inject = ['$http', '$q', '$timeout', 'toastr', 'back4app'];
+    http.$inject = ['$http', '$q', 'Upload', 'toastr', 'back4app'];
 
     /**
      * Wrapper over the standard http function
      */
 
-    function http($http, $q, $timeout, toastr, back4app) {
+    function http($http, $q, Upload, toastr, back4app) {
         console.log('create request service');
 
         return {

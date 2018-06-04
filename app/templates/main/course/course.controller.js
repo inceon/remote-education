@@ -4,9 +4,9 @@
     angular.module('app')
         .controller('CourseController', CourseController);
 
-    CourseController.$inject = ['lessons', 'tests', 'test', 'lesson', '$stateParams', 'courses', 'group', 'toastr', '$state'];
+    CourseController.$inject = ['lessons', 'tests', 'test', 'lesson', '$stateParams', 'courses', 'group', 'toastr', 'file'];
 
-    function CourseController(lessons, tests, test, lesson, $stateParams, courses, group, toastr, $state) {
+    function CourseController(lessons, tests, test, lesson, $stateParams, courses, group, toastr, file) {
         let vm = this;
 
         vm.lessons = lessons;
@@ -23,6 +23,7 @@
         vm.addGroup = addGroup;
         vm.addLesson = addLesson;
         vm.saveCourseName = saveCourseName;
+        vm.uploadFile = uploadFile;
 
         if(_.isEmpty(vm.course)) {
             courses.get($stateParams.id)
@@ -134,6 +135,19 @@
                 name: vm.course.name
             })
             .then(() => toastr.success('Назва успішно збережена'));
+        }
+
+        function uploadFile($file) {
+            file.upload({
+                file: $file,
+                name: $file.name,
+                course: $stateParams.id
+            })
+                .then((resp) => {
+                    toastr.success('Файл завантажено');
+                }, (resp) => {
+                    toastr.error('Помилка завантаження: ' + resp.status);
+                })
         }
 
     }
