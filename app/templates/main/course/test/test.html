@@ -1,6 +1,6 @@
 <div class="row pl-3 pr-3">
     <div class="col-md-8 offset-md-2">
-        <div class="text-right">
+        <div class="text-right" ng-if="$root.user.role != 'user'">
             <a class="btn cursor-pointer pl-1 mr-2" ui-sref="main.test_result({id: vm.test.objectId})">
                 Результати
                 <i class="fa-list fa"></i>
