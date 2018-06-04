@@ -17,7 +17,7 @@
 
         if(_.isEmpty(vm.lesson)) {
             lesson.get($stateParams.id)
-                  .then(res => vm.lesson = res);
+                  .then(res => vm.lesson = res[0]);
         }
 
         function saveText() {

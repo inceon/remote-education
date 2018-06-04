@@ -48,7 +48,7 @@
             <div class="list-group-item"
                ng-repeat="lesson in vm.lessons"
             >
-                <a href="" ui-sref="main.lesson({test: test, id: test.objectId})">
+                <a href="" ui-sref="main.lesson({lesson: lesson, id: lesson.objectId})">
                     {{ $index+1 }}. {{ lesson.name }}
                 </a>
                 <span class="cursor-pointer pl-2 pr-2"
