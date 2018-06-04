@@ -10,13 +10,13 @@
     <a class="cursor-pointer ml-2" ng-if="vm.editName" ng-click="vm.saveCourseName()">
         <i class="fa fa-save"></i>
     </a>
-    <a class="cursor-pointer ml-2" ng-click="vm.editName = !vm.editName">
+    <a class="cursor-pointer ml-2" ng-click="vm.editName = !vm.editName" ng-if="$root.user.role != 'user'">
         <i ng-show="!vm.editName" class="fa fa-pencil"></i>
         <i ng-show="vm.editName" class="fa fa-remove"></i>
     </a>
 </div>
 <div class=" col-md-8 offset-md-2">
-    <div class="text-right">
+    <div class="text-right" ng-if="$root.user.role != 'user'">
         <a class="btn cursor-pointer pl-1 mr-2" ng-click="vm.addSmth = !vm.addSmth">
             {{ vm.tab != 'groups' ? 'Додати лекцію' : 'Додати групу' }}
             <i class="fa-plus fa"></i>
@@ -53,7 +53,8 @@
                 </a>
                 <span class="cursor-pointer pl-2 pr-2"
                       style="float: right; border: 1px solid #ccc; border-radius: 50%"
-                      ng-click="vm.removeLesson(lesson, $index, $event);">
+                      ng-click="vm.removeLesson(lesson, $index, $event);"
+                      ng-if="$root.user.role != 'user'">
                     <i class="fa fa-remove"></i>
                 </span>
             </div>
@@ -70,7 +71,8 @@
                 </a>
                 <span class="cursor-pointer pl-2 pr-2"
                       style="float: right; border: 1px solid #ccc; border-radius: 50%"
-                      ng-click="vm.removeTest(test, $index, $event);">
+                      ng-click="vm.removeTest(test, $index, $event);"
+                      ng-if="$root.user.role != 'user'">
                     <i class="fa fa-remove"></i>
                 </span>
             </div>
@@ -85,7 +87,8 @@
                 </a>
                 <span class="cursor-pointer pl-2 pr-2"
                       style="float: right; border: 1px solid #ccc; border-radius: 50%"
-                      ng-click="vm.removeFile(file, $index, $event);">
+                      ng-click="vm.removeFile(file, $index, $event);"
+                      ng-if="$root.user.role != 'user'">
                     <i class="fa fa-remove"></i>
                 </span>
             </div>
