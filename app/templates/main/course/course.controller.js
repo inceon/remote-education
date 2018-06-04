@@ -4,13 +4,14 @@
     angular.module('app')
         .controller('CourseController', CourseController);
 
-    CourseController.$inject = ['lessons', 'tests', 'test', 'lesson', '$stateParams', 'courses', 'group', 'toastr', 'file'];
+    CourseController.$inject = ['lessons', 'tests', 'files', 'test', 'lesson', '$stateParams', 'courses', 'group', 'toastr', 'file'];
 
-    function CourseController(lessons, tests, test, lesson, $stateParams, courses, group, toastr, file) {
+    function CourseController(lessons, tests, files, test, lesson, $stateParams, courses, group, toastr, file) {
         let vm = this;
 
         vm.lessons = lessons;
         vm.tests = tests;
+        vm.files = files;
         vm.course = $stateParams.course;
         vm.tab = 'lessons';
         vm.groups = undefined;

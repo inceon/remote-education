@@ -28,7 +28,11 @@
         }
 
         function get(id) {
-
+            return http.get(url.fileData, {
+                where: {
+                    'course': id
+                }
+            }).then(res => res.results);
         }
 
     }

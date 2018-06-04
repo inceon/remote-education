@@ -75,6 +75,21 @@
                 </span>
             </div>
         </div>
+        <div class="list-group" ng-if="vm.files.length">
+            <b>Файли</b>
+            <div class="list-group-item"
+                 ng-repeat="file in vm.files"
+            >
+                <a ng-href="file.file">
+                    {{ $index+1 }}. {{ file.name }}
+                </a>
+                <span class="cursor-pointer pl-2 pr-2"
+                      style="float: right; border: 1px solid #ccc; border-radius: 50%"
+                      ng-click="vm.removeFile(file, $index, $event);">
+                    <i class="fa fa-remove"></i>
+                </span>
+            </div>
+        </div>
     </div>
 
     <div ng-if="vm.tab == 'groups'">

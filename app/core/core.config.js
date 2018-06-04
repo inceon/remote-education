@@ -57,6 +57,9 @@
                     tests: function (courses, $stateParams) {
                         return courses.tests($stateParams.id);
                     },
+                    files: function (file, $stateParams) {
+                        return file.get($stateParams.id);
+                    },
                 }
             })
             .state('main.lesson', {
