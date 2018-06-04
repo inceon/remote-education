@@ -82,7 +82,7 @@
             <div class="list-group-item"
                  ng-repeat="file in vm.files"
             >
-                <a ng-href="file.file">
+                <a ng-href="{{ file.file }}">
                     {{ $index+1 }}. {{ file.name }}
                 </a>
                 <span class="cursor-pointer pl-2 pr-2"
