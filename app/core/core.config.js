@@ -33,7 +33,11 @@
                 controllerAs: 'vm',
                 resolve: {
                     courses_user: function (courses, $rootScope) {
-                        return courses.allMy($rootScope.user.group);
+                        if($rootScope.user.role == 'admin') {
+                            return courses.all().then(res => res.map(course => ({ course: course.objectId })));
+                        } else {
+                            return courses.allMy($rootScope.user.group);
+                        }
                     },
                     coursesData: function ($q, courses_user, courses) {
                         return $q.all(courses_user.map((course_user) => {
