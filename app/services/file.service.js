@@ -13,7 +13,8 @@
 
         return {
             upload: upload,
-            get: get
+            get: get,
+            delete: deleteT
         };
 
         function upload(data) {
@@ -33,6 +34,10 @@
                     'course': id
                 }
             }).then(res => res.results);
+        }
+
+        function deleteT(fileId) {
+            return http.delete(url.fileData + '/' + fileId);
         }
 
     }

@@ -20,6 +20,8 @@
         vm.changeTab = changeTab;
         vm.removeGroup = removeGroup;
         vm.removeLesson = removeLesson;
+        vm.removeTest = removeTest;
+        vm.removeFile = removeFile;
         vm.notContain = notContain;
         vm.addGroup = addGroup;
         vm.addLesson = addLesson;
@@ -64,6 +66,32 @@
                     .then(() => {
                         toastr.success('Лекцію видалено');
                         vm.lessons.splice(index, 1);
+                    });
+            }
+        }
+
+        function removeTest(testData, index, event) {
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+
+            if(confirm('Ви дійсно хочете видалити тест: ' + testData.name + '?')) {
+                test.delete(testData.objectId)
+                    .then(() => {
+                        toastr.success('Тест видалено');
+                        vm.tests.splice(index, 1);
+                    });
+            }
+        }
+
+        function removeFile(fileData, index, event) {
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+
+            if(confirm('Ви дійсно хочете видалити файл: ' + fileData.name + '?')) {
+                file.delete(fileData.objectId)
+                    .then(() => {
+                        toastr.success('Файл видалено');
+                        vm.files.splice(index, 1);
                     });
             }
         }
