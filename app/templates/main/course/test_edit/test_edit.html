@@ -1,8 +1,9 @@
 <div class="row pl-3 pr-3">
     <div class="col-md-8 offset-md-2">
+        <input type="text" class="form-control" ng-model="vm.test.name"><br>
         <ul class="list-group mb-2 border border-info rounded" ng-repeat="test in vm.parsedTest track by $index">
             <li class="list-group-item active">
-                <input type="text" class="form-control" ng-model="test.question">
+                <input type="text" class="form-control" ng-model="vm.parsedTest[$index].question">
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center" ng-repeat="answer in test.answer track by $index">
                 <div class="input-group-prepend">
@@ -11,16 +12,20 @@
                            ng-value="$index"
                     >
                 </div>
-                <input type="text" class="form-control mr-2" ng-model="answer">
-                <span class="badge badge-primary badge-pill" ng-if="$index == test.right">✓</span>
+                <input type="text" class="form-control mr-2" ng-model="vm.parsedTest[$parent.$index].answer[$index]">
+                <span class="badge badge-primary badge-pill" ng-if="$index == test.right">✓</span> &nbsp;
+                <span class="badge badge-warning badge-pill cursor-pointer" ng-click="vm.removeAnswer(test, $index)">x</span>
             </li>
             <li class="list-group-item text-center cursor-pointer" ng-click="vm.addAnswer(test)">
                 Додати відповідь
             </li>
         </ul>
 
-        <div class="btn btn-primary col-md-12 mb-5" ng-click="vm.addTest()">
+        <div class="btn btn-primary col-md-12 mb-1" ng-click="vm.addTest()">
             Додати тест
+        </div>
+        <div class="btn btn-secondary col-md-12 mb-5" ng-click="vm.saveTest()">
+            Зберегти тест
         </div>
     </div>
 </div>

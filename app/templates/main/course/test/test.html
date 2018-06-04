@@ -11,17 +11,21 @@
             </a>
         </div>
 
+        <div class="list-group text-center">
+            <h4>{{ vm.test.name }}</h4>
+        </div>
+
         <div class="list-group text-center" ng-if="vm.userResult">
             <h4>Ваш результат: {{ vm.userResult.result }}</h4>
         </div>
 
         <div class="list-group" ng-if="!vm.userResult">
-            <div class="list-group-item" ng-repeat="test in vm.parsedTest">
+            <div class="list-group-item" ng-repeat="test in vm.parsedTest track by $index">
 
                 <div style="color: dodgerblue">
                     {{ $index+1 }}. {{ test.question }}
                 </div>
-                <div class="radio" ng-repeat="answer in test.answer">
+                <div class="radio" ng-repeat="answer in test.answer track by $index">
                     <label><input type="radio"
                                   ng-model="vm.userAnswers[$parent.$index]"
                                   ng-value="$index"

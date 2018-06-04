@@ -5,15 +5,17 @@
         .controller('TestEdit', TestEdit);
 
 
-    TestEdit.$inject = ['$stateParams', 'test', 'toastr'];
+    TestEdit.$inject = ['$stateParams', 'test', 'toastr', '$state'];
 
-    function TestEdit($stateParams, test, toastr) {
+    function TestEdit($stateParams, test, toastr, $state) {
         let vm = this;
 
         vm.test = $stateParams.test;
         vm.parsedTest = [];
         vm.addTest = addTest;
         vm.addAnswer = addAnswer;
+        vm.saveTest = saveTest;
+        vm.removeAnswer = removeAnswer;
 
         if(!_.isEmpty(vm.test['questions'])) {
             _.each(JSON.parse(vm.test['questions']), (question, idx) => {
@@ -43,6 +45,27 @@
 
         function addAnswer(test) {
             test.answer.push('Відповідь');
+        }
+
+        function saveTest() {
+            let testData = {
+                objectId    : vm.test.objectId,
+                name        : vm.test.name,
+                questions   : JSON.stringify(vm.parsedTest.map(el => el.question)),
+                answers     : JSON.stringify(vm.parsedTest.map(el => el.answer)),
+                right       : JSON.stringify(vm.parsedTest.map(el => el.right))
+            };
+
+            test.save(testData)
+                .then(res => {
+                    $state.go('main.test', {test: testData, id: testData.objectId});
+                    toastr.success('Тест успішно збережений.');
+                })
+                .catch(res => toastr.error('Помилка збереження.'));
+        }
+
+        function removeAnswer(test, index) {
+            test.answer.splice(index, 1);
         }
     }
 })();

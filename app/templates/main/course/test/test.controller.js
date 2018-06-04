@@ -15,7 +15,6 @@
         vm.userAnswers = [];
         vm.userResult = undefined;
         vm.parseTest = parseTest;
-        vm.saveText = saveText;
         vm.changeEdit = changeEdit;
         vm.sendAnswers = sendAnswers;
         vm.isEdit = false;
@@ -49,13 +48,6 @@
                             vm.userAnswers[idx] = -1;
                         });
                     }
-                });
-        }
-
-        function saveText() {
-            test.save(vm.test)
-                .then(() => {
-                    toastr.success('Текст упішно збережено');
                 });
         }
 
