@@ -52,9 +52,11 @@
 
         function save(userData, index) {
             vm.isEdit[index] = false;
-            if(Object.keys(userData).length != 6) {
-                toastr.error('Ви ввели не всі дані');
-                return false;
+            for(let i in userData) {
+                if(_.isEmpty(userData[i])) {
+                    toastr.error('Ви ввели не всі дані');
+                    return false;
+                }
             }
 
 
