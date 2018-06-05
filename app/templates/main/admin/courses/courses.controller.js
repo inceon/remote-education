@@ -36,6 +36,12 @@
         }
 
         function save(courseData, index) {
+
+            if(_.isEmpty(courseData.name)) {
+                toastr.error('Назва не може бути пустою');
+                return;
+            }
+
             vm.isEdit[index] = false;
             courses.save(courseData)
                 .then(() => {
@@ -44,6 +50,10 @@
         }
 
         function create() {
+            if(_.isEmpty(vm.newCourse)) {
+                toastr.error('Назва не може бути пустою');
+                return;
+            }
             courses.create(vm.newCourse)
                 .then((res) => {
                     toastr.success('Дані про курс створено');
