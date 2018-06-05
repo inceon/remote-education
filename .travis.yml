@@ -1,8 +1,10 @@
 sudo: required
-dist: build
+dist: app
 language: node_js
 node_js:
   - "8"
+install:
+script:
 deploy:
   provider: pages
   skip_cleanup: true
