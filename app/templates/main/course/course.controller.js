@@ -133,6 +133,11 @@
         }
 
         function addLesson() {
+            if(_.isEmpty(vm.newName)) {
+                toastr.error('Назва не може бути пустою');
+                return true;
+            }
+
             if(vm.addSmth) {
                 lesson.add($stateParams.id, vm.newName)
                     .then((res) => {
@@ -160,6 +165,11 @@
         }
 
         function saveCourseName() {
+            if(_.isEmpty(vm.course.name)) {
+                toastr.error('Назва не може бути пустою');
+                return true;
+            }
+
             courses.update($stateParams.id, {
                 name: vm.course.name
             })
