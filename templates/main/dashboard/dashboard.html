@@ -1,0 +1,9 @@
+<div class="text-center font-weight-bold mt-1 mb-2">
+    Мої курси
+</div>
+<div class="list-group col-md-8 offset-md-2">
+    <a href="#" class="list-group-item"
+        ng-repeat="course in vm.courses"
+        ui-sref="main.course({id: course.objectId, course: course})"
+    >{{ $index+1 }}. {{ course.name }}</a>
+</div>

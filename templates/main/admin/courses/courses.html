@@ -1,0 +1,48 @@
+<div class="text-center font-weight-bold">
+    <button ng-click="vm.isCreate = true" type="button" class="btn btn-light">
+        Додати курс <i class="fa fa-plus"></i>
+    </button>
+</div>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Назва</th>
+        <th scope="col">Дії</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr ng-if="vm.isCreate">
+            <th scope="row">0</th>
+            <td>
+                <input name="name" ng-model="vm.newCourse.name" title="name">
+            </td>
+            <td>
+                <a class="cursor-pointer"><i class="fa fa-save" ng-click="vm.create()"></i></a>
+                &nbsp;&nbsp;&nbsp;
+                <a class="cursor-pointer"><i class="fa fa-remove" ng-click="vm.isCreate = false"></i></a>
+            </td>
+        </tr>
+        <tr ng-repeat="course in vm.courses">
+            <th scope="row">{{ $index+1 }}</th>
+            <td>
+                <a href="#" ui-sref="main.course({id: course.objectId})" ng-if="!vm.isEdit[$index]">{{ course.name }}</a>
+                <input type="text" name="name" ng-model="course.name" ng-if="vm.isEdit[$index]">
+            </td>
+            <td>
+                <span ng-if="!vm.isEdit[$index]">
+                    <a class="cursor-pointer"><i class="fa fa-pencil" ng-click="vm.edit($index)"></i></a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a class="cursor-pointer"><i class="fa fa-remove" ng-click="vm.remove(course, $index)"></i></a>
+                </span>
+                <span ng-if="vm.isEdit[$index]">
+                    <a class="cursor-pointer"><i class="fa fa-save" ng-click="vm.saveUser(course, $index)"></i></a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a class="cursor-pointer"><i class="fa fa-remove" ng-click="vm.edit($index)"></i></a>
+                </span>
+            </td>
+        </tr>
+    </tbody>
+</table>

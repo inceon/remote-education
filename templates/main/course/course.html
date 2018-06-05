@@ -1,0 +1,124 @@
+<div class="text-center font-weight-bold mt-1 mb-2">
+    <span ng-if="!vm.editName">
+        {{ vm.course.name }}.
+        {{ vm.tab != 'groups' ? 'Лекції' : 'Групи' }}
+
+    </span>
+    <span ng-if="vm.editName">
+        <input type="text" ng-model="vm.course.name">
+    </span>
+    <a class="cursor-pointer ml-2" ng-if="vm.editName" ng-click="vm.saveCourseName()">
+        <i class="fa fa-save"></i>
+    </a>
+    <a class="cursor-pointer ml-2" ng-click="vm.editName = !vm.editName" ng-if="$root.user.role != 'user'">
+        <i ng-show="!vm.editName" class="fa fa-pencil"></i>
+        <i ng-show="vm.editName" class="fa fa-remove"></i>
+    </a>
+</div>
+<div class=" col-md-8 offset-md-2">
+    <div class="text-right" ng-if="$root.user.role != 'user'">
+        <a class="btn cursor-pointer pl-1 mr-2" ng-click="vm.addSmth = !vm.addSmth">
+            {{ vm.tab != 'groups' ? 'Додати лекцію' : 'Додати групу' }}
+            <i class="fa-plus fa"></i>
+        </a>
+        <a class="btn cursor-pointer pl-1 mr-2" ng-click="vm.addTest = !vm.addTest" ng-if="vm.tab != 'groups'">
+            Додати тест
+            <i class="fa-plus fa"></i>
+        </a>
+        <div class="btn cursor-pointer pl-1 mr-2"
+             ng-if="vm.tab != 'groups'"
+             ngf-select="vm.uploadFile($file)"
+             ngf-pattern="'.pdf,.jpg,.png,.doc,.docx,.xls,.accdb,.jpeg,.txt'">
+            Додати файл
+            <i class="fa-plus fa"></i>
+        </div>
+        <a class="btn cursor-pointer pr-2" ng-click="vm.changeTab()">
+            {{ vm.tab == 'groups' ? 'Лекції' : 'Групи' }}
+            <i class="fa-cog fa"></i>
+        </a>
+    </div>
+
+    <!--TABS-->
+
+    <div ng-if="vm.tab == 'lessons'">
+        <div class="list-group mb-1" ng-if="vm.addSmth || vm.addTest">
+            <input class="list-group-item" ng-model="vm.newName" placeholder="Назва...">
+            <div class="btn btn-primary" ng-click="vm.addLesson()">
+                {{ vm.addSmth ? 'Додати лекцію' : 'Додати тест' }}
+            </div>
+        </div>
+        <div class="list-group">
+            <div class="list-group-item"
+               ng-repeat="lesson in vm.lessons"
+            >
+                <a href="" ui-sref="main.lesson({lesson: lesson, id: lesson.objectId})">
+                    {{ $index+1 }}. {{ lesson.name }}
+                </a>
+                <span class="cursor-pointer pl-2 pr-2"
+                      style="float: right; border: 1px solid #ccc; border-radius: 50%"
+                      ng-click="vm.removeLesson(lesson, $index, $event);"
+                      ng-if="$root.user.role != 'user'">
+                    <i class="fa fa-remove"></i>
+                </span>
+            </div>
+
+            <div ng-if="!vm.lessons.length">Жодної лекції не знайдено ☹</div>
+        </div>
+        <div class="list-group" ng-if="vm.tests.length">
+            <b>Тести</b>
+            <div class="list-group-item"
+                 ng-repeat="test in vm.tests"
+            >
+                <a href="" ui-sref="main.test({test: test, id: test.objectId})">
+                    {{ $index+1 }}. {{ test.name }}
+                </a>
+                <span class="cursor-pointer pl-2 pr-2"
+                      style="float: right; border: 1px solid #ccc; border-radius: 50%"
+                      ng-click="vm.removeTest(test, $index, $event);"
+                      ng-if="$root.user.role != 'user'">
+                    <i class="fa fa-remove"></i>
+                </span>
+            </div>
+        </div>
+        <div class="list-group" ng-if="vm.files.length">
+            <b>Файли</b>
+            <div class="list-group-item"
+                 ng-repeat="file in vm.files"
+            >
+                <a ng-href="{{ file.file }}">
+                    {{ $index+1 }}. {{ file.name }}
+                </a>
+                <span class="cursor-pointer pl-2 pr-2"
+                      style="float: right; border: 1px solid #ccc; border-radius: 50%"
+                      ng-click="vm.removeFile(file, $index, $event);"
+                      ng-if="$root.user.role != 'user'">
+                    <i class="fa fa-remove"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="vm.tab == 'groups'">
+        <span ng-if="!vm.groups">Завантаження...</span>
+        <div class="list-group mb-1" ng-if="vm.addSmth">
+            <select class="list-group-item" ng-model="vm.newGroupId">
+                <option value="" disabled>Оберіть групу</option>
+                <option ng-repeat="group in vm.allGroups | filter:vm.notContain(vm.groups)" ng-value="group.objectId">{{group.name}}</option>
+            </select>
+            <div class="btn btn-primary" ng-click="vm.addGroup()">
+                Додати групу
+            </div>
+        </div>
+        <div class="list-group">
+            <div class="list-group-item" ng-repeat="group in vm.groups">
+                {{ group.name }}
+                <a class="cursor-pointer" ng-click="vm.removeGroup(group, $index)">
+                    <i class="fa fa-remove"></i>
+                </a>
+            </div>
+
+            <div ng-if="!vm.groups.length">Жодної групи не знайдено ☹</div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,98 @@
+<div class="text-center font-weight-bold">
+    <button ng-click="vm.isCreate = true" type="button" class="btn btn-light">
+        Додати користувача <i class="fa fa-plus"></i>
+    </button>
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">І'мя</th>
+        <th scope="col">Прізвище</th>
+        <th scope="col">Email</th>
+        <th scope="col">Група</th>
+        <th scope="col">Роль</th>
+        <th scope="col" ng-if="vm.isCreate || vm.isEdit.some(vm.checkTrue)">Пароль</th>
+        <th scope="col">Дії</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr ng-if="vm.isCreate">
+            <th scope="row">0</th>
+            <td>
+                <input name="name" ng-model="vm.newUser.name" title="name">
+            </td>
+            <td>
+                <input name="surname" ng-model="vm.newUser.surname" title="surname">
+            </td>
+            <td>
+                <input name="email" ng-model="vm.newUser.email" title="email">
+            </td>
+            <td>
+                <select ng-model="vm.newUser.group">
+                    <option ng-value="group" ng-repeat="group in vm.groups">{{group.name}}</option>
+                </select>
+            </td>
+            <td>
+                <select ng-model="vm.newUser.role" title="role">
+                    <option value="admin">Адмін</option>
+                    <option value="teacher">Вчитель</option>
+                    <option value="user">Користувач</option>
+                </select>
+            </td>
+            <td>
+                <input type="password" name="group" ng-model="vm.newUser.pass" title="password">
+            </td>
+            <td>
+                <a class="cursor-pointer"><i class="fa fa-save" ng-click="vm.create()"></i></a>
+                &nbsp;&nbsp;&nbsp;
+                <a class="cursor-pointer"><i class="fa fa-remove" ng-click="vm.isCreate = false"></i></a>
+            </td>
+        </tr>
+        <tr ng-repeat="user in vm.users">
+            <th scope="row">{{ $index+1 }}</th>
+            <td>
+                <span ng-if="!vm.isEdit[$index]">{{ user.name }}</span>
+                <input type="text" name="name" ng-model="user.name" ng-if="vm.isEdit[$index]">
+            </td>
+            <td>
+                <span ng-if="!vm.isEdit[$index]">{{ user.surname }}</span>
+                <input type="text" name="surname" ng-model="user.surname" ng-if="vm.isEdit[$index]">
+            </td>
+            <td>
+                <span ng-if="!vm.isEdit[$index]">{{ user.email }}</span>
+                <input type="text" name="email" ng-model="user.email" ng-if="vm.isEdit[$index]">
+            </td>
+            <td>
+                <span ng-if="!vm.isEdit[$index]">{{ user.group.name }}</span>
+                <select ng-model="user.group" ng-if="vm.isEdit[$index]">
+                    <option ng-value="group" ng-repeat="group in vm.groups">{{group.name}}</option>
+                </select>
+            </td>
+            <td>
+                <span ng-if="!vm.isEdit[$index]">{{ user.role }}</span>
+                <select ng-model="user.role" ng-if="vm.isEdit[$index]">
+                    <option value="admin">Адмін</option>
+                    <option value="teacher">Вчитель</option>
+                    <option value="user">Користувач</option>
+                </select>
+            </td>
+            <td ng-if="vm.isEdit[$index] || vm.isCreate">
+                <input type="password" name="pass" ng-model="user.pass" ng-if="vm.isEdit[$index]">
+            </td>
+            <td>
+                <span ng-if="!vm.isEdit[$index]">
+                    <a class="cursor-pointer"><i class="fa fa-pencil" ng-click="vm.edit($index)"></i></a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a class="cursor-pointer"><i class="fa fa-remove" ng-click="vm.remove(user, $index)"></i></a>
+                </span>
+                <span ng-if="vm.isEdit[$index]">
+                    <a class="cursor-pointer"><i class="fa fa-save" ng-click="vm.saveUser(user, $index)"></i></a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a class="cursor-pointer"><i class="fa fa-remove" ng-click="vm.edit($index)"></i></a>
+                </span>
+            </td>
+        </tr>
+    </tbody>
+</table>

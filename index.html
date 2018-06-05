@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html lang="en" ng-app="app" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="app" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="app" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="app" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Дистанційна освіта</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="content/css/angular-material.css"/>
+    <link rel="stylesheet" href="content/css/angular-toastr.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="content/css/app.css">
+
+    <script>
+
+        let lol = console.error;
+
+        console.error = (...params) => {
+            alert('Здається виникла помилка на сервері. Спробуйте перезавантажити сторінку');
+            lol(...params);
+        }
+
+    </script>
+
+
+</head>
+<body>
+
+<div id="page" class="main-container">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <a class="navbar-brand" ui-sref="main.dashboard">Дистанційне навчання</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button"
+                aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-link" ng-if="$root.user">
+                    Привіт {{ $root.user.name }}!
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" ui-sref="login" ng-if="!$root.user">
+                        <i class="fa fa-fw fa-sign-in"></i>Ввійти
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" ui-sref="logout" ng-if="$root.user">
+                        <i class="fa fa-fw fa-sign-out"></i>Вийти
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" ui-sref="main.admin" ng-if="$root.user.role == 'admin'">
+                        <i class="fa fa-fw fa-lock"></i>Адмінка
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div ui-view style="margin-top: 60px"></div>
+
+</div>
+
+<script src="content/js/angular.min.js"></script>
+<script src="content/js/angular-ui-router.min.js"></script>
+<script src="content/js/angular-material.min.js"></script>
+<script src="content/js/angular-toastr.tpls.js"></script>
+<script src="content/js/ngStorage.min.js"></script>
+<script src="content/js/angular-sanitize.min.js"></script>
+<script src="content/js/marked.js"></script>
+<script src="content/js/angular-marked.min.js"></script>
+<script src="content/js/ng-file-upload-all.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js"></script>
+
+<script src="app.js"></script>
+<script src="core/core.module.js"></script>
+<script src="core/core.config.js"></script>
+<script src="core/blocks/directives/directives.module.js"></script>
+<script src="core/blocks/filters/filters.module.js"></script>
+<script src="core/blocks/request/request.module.js"></script>
+<script src="core/blocks/services/services.module.js"></script>
+
+
+<!--services-->
+<script src="services/user.service.js"></script>
+<script src="services/group.service.js"></script>
+<script src="services/courses.service.js"></script>
+<script src="services/lesson.service.js"></script>
+<script src="services/test.service.js"></script>
+<script src="services/file.service.js"></script>
+
+<!--factories-->
+<script src="factories/request.js"></script>
+<script src="factories/url.js"></script>
+
+<!--filters-->
+<script src="filters/example.filter.js"></script>
+
+<!--directives-->
+
+<!--controllers-->
+<script src="templates/homepage/homepage.controller.js"></script>
+<script src="templates/login/login.controller.js"></script>
+<script src="templates/main/main.controller.js"></script>
+<script src="templates/main/dashboard/dashboard.controller.js"></script>
+<script src="templates/main/admin/admin.controller.js"></script>
+<script src="templates/main/admin/users/users.controller.js"></script>
+<script src="templates/main/admin/courses/courses.controller.js"></script>
+<script src="templates/main/course/course.controller.js"></script>
+<script src="templates/main/course/lesson/lesson.controller.js"></script>
+<script src="templates/main/course/test/test.controller.js"></script>
+<script src="templates/main/course/test_results/test_results.controller.js"></script>
+<script src="templates/main/course/test_edit/test_edit.controller.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+.homepage .title {
+  font-size: 1.5em;
+  text-align: center;
+  margin: 15px; }
+
+.homepage .temp, .homepage .wind {
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  background: #fefefe; }
+
+.login {
+  background: white;
+  max-width: 800px;
+  min-width: 200px;
+  margin: 0 auto; }
+  .login .btn-container {
+    text-align: center; }
+
+md-content.md-default-theme, md-content {
+  background-color: transparent; }
+
+.cursor-pointer {
+  cursor: pointer; }
