@@ -20,6 +20,17 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="content/css/app.css">
 
+    <script>
+
+        let lol = console.error;
+
+        console.error = (...params) => {
+            alert('Здається виникла помилка на сервері. Спробуйте перезавантажити сторінку');
+            lol(...params);
+        }
+
+    </script>
+
 
 </head>
 <body>

@@ -14,9 +14,9 @@
             token: 'dsBJyP5VRbxNZgMQEfX5RzqyMpOLFBRa713w0l1j'
         });
 
-    runBlock.$inject = ['$localStorage', 'user', '$rootScope', '$state'];
+    runBlock.$inject = ['$localStorage', 'user', '$rootScope', '$state', 'toastr'];
 
-    function runBlock($localStorage, user, $rootScope, $state) {
+    function runBlock($localStorage, user, $rootScope, $state, toastr) {
 
         if($localStorage.userId) {
 
