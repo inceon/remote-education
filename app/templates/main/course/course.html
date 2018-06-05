@@ -25,7 +25,10 @@
             Додати тест
             <i class="fa-plus fa"></i>
         </a>
-        <div class="btn cursor-pointer pl-1 mr-2" ng-if="vm.tab != 'groups'" ngf-select="vm.uploadFile($file)">
+        <div class="btn cursor-pointer pl-1 mr-2"
+             ng-if="vm.tab != 'groups'"
+             ngf-select="vm.uploadFile($file)"
+             ngf-pattern="'.pdf,.jpg,.png,.doc,.docx,.xls,.accdb,.jpeg,.txt'">
             Додати файл
             <i class="fa-plus fa"></i>
         </div>

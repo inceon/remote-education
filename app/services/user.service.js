@@ -6,9 +6,9 @@
         .service('user', user);
 
 
-    user.$inject = ['http', 'url', '$rootScope', '$localStorage'];
+    user.$inject = ['http', 'url', '$rootScope', '$localStorage', 'toastr'];
 
-    function user(http, url, $rootScope, $localStorage) {
+    function user(http, url, $rootScope, $localStorage, toastr) {
 
 
         return {
@@ -33,10 +33,14 @@
             return http.get(url.user, {
                 where: {
                     "email": data.email,
-                    "pass": data.pass,
+                    "pass": data.password,
                 }
             })
             .then(function (res) {
+                if(_.isEmpty(res.results)) {
+                    toastr.error('Користувача не знайдено');
+                    return false;
+                }
                 $rootScope.user = res.results[0];
                 $localStorage.userId = res.results[0].objectId;
                 return res.results;
