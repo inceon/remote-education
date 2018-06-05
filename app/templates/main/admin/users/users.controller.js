@@ -52,6 +52,12 @@
 
         function save(userData, index) {
             vm.isEdit[index] = false;
+            if(Object.keys(userData).length != 6) {
+                toastr.error('Ви ввели не всі дані');
+                return false;
+            }
+
+
             user.save(_.extend({}, userData, {
                 group: userData.group.objectId
             }))
@@ -61,6 +67,11 @@
         }
 
         function create() {
+            if(Object.keys(vm.newUser).length != 6) {
+                toastr.error('Ви ввели не всі дані');
+                return false;
+            }
+
             user.create(
                 _.extend({}, vm.newUser, {
                     group: vm.newUser.group.objectId
